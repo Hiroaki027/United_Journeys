@@ -1,24 +1,32 @@
-# README
+# United Journeys
+​
+## サイト概要
+### サイトテーマ
+留学経験者や海外在住の人たちが、海外に興味がある人達や海外渡航を考えている人達の為の情報共有になるサイト
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### テーマを選んだ理由
+学生時代に海外留学を２度経験していて、その際にどのような物を持っていくべきかや
+渡航先の国の治安情報等を集めるのに苦労しました。
+また、留学を経験している人や海外在住の人を見つけることが
+普段生活していてなかなか機会がなかったので、そういった機会の場が
+あればいいなと思いました。
 
-Things you may want to cover:
+### ターゲットユーザ
+* 海外に興味がある人
+* 留学を考えているが、事前に情報を集めたい人
+### 主な利用シーン
+* 行きたい国の情報を検索する時
+* 海外に言ったことのある人達の経験や感想を知りたい時
+* おすすめの海外の場所や、逆に気を付けたほうがいい情報を投稿する時
 
-* Ruby version
+## 設計書
+​後ほど作成予定
 
-* System dependencies
+## 開発環境
+- OS：Windows10pro
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
