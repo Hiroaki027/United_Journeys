@@ -24,10 +24,10 @@
 * おすすめの海外の場所や、逆に気を付けたほうがいい情報を投稿する時
 
 ## 設計書
-- [UI Flows](https://drive.google.com/file/d/1m9xfd9PNO57t5elqn0-nzYRFS0uaaDXo/view?usp=sharing){:target="_blank"}
-- [ER図](https://drive.google.com/file/d/1WC8oNhSl4hUUAxMwTKOzWfcB0M9C7mu4/view?usp=sharing){:target="_blank"}
-- [テーブル定義書](https://docs.google.com/spreadsheets/d/197ONMk3S5vfz5y6_kB7dmVB9PkNQqB2QNGk1nfB4Cvw/edit?usp=sharing){:target="_blank"}
-- [アプリケーション詳細設計書](https://docs.google.com/spreadsheets/d/1pyYg-DE8oua6zRN-nQTqsfOZmeBGO2UN26zk6NaAb0U/edit?usp=sharing){:target="_blank"}
+- <a href="https://drive.google.com/file/d/1m9xfd9PNO57t5elqn0-nzYRFS0uaaDXo/view?usp=sharing" target="_blank">UI Flows</a>
+- <a href="https://drive.google.com/file/d/1WC8oNhSl4hUUAxMwTKOzWfcB0M9C7mu4/view?usp=sharing" target="_blank">ER図</a>
+- <a href="https://docs.google.com/spreadsheets/d/197ONMk3S5vfz5y6_kB7dmVB9PkNQqB2QNGk1nfB4Cvw/edit?usp=sharing" target="_blank">テーブル定義書</a>
+- <a href="https://docs.google.com/spreadsheets/d/1pyYg-DE8oua6zRN-nQTqsfOZmeBGO2UN26zk6NaAb0U/edit?usp=sharing" target="_blank">アプリケーション詳細設計書</a>
 
 ## 開発環境
 - OS：Windows10pro
