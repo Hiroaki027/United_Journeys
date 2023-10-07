@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
+    post "members/guest_sign_in", to: "members/sessions#guest_sign_in"
     resources :members,  only: [:show,:edit,:update,:withdrawal]
     resources :posts, except: [:new] do
       resources :post_comments, only: [:create,:destroy]
