@@ -1,2 +1,14 @@
-<h1>Public::Members#edit</h1>
-<p>Find me in app/views/public/members/edit.html.erb</p>
+<h2>会員編集</h2>
+
+<%= form_with model: @member do |f| %>
+<div>
+  <label for="inputName">ユーザー名</label><br>
+  <%= f.text_field :nick_name, autofocus: true, id:"inputName", placeholder:"inputName"%><br />
+  <label for="inputImage">プロフィール画像</label><br />
+  <%= f.file_field :profile_image, accept: "image/*" %><br />
+  <label for="inputIntroduction">自己紹介</label><br />
+  <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction" %><br />
+  <%= f.submit "変更を保存", class: 'btn btn-primary btn-block mt-2' %>
+  <%= link_to "退会する", withdrawal_member_path, method: :patch, class: "btn btn-danger", "data-confirm" => "本当に退会しますか？", style: "width: 30%" %>
+<% end %>
+</div>
