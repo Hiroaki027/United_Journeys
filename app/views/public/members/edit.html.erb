@@ -4,6 +4,8 @@
 <div>
   <label for="inputName">ユーザー名</label><br>
   <%= f.text_field :nick_name, autofocus: true, id:"inputName", placeholder:"inputName"%><br />
+  <label for="inputName">居住地</label><br>
+  <%= f.text_field :residence, autofocus: true, id:"inputResidence", placeholder:"inputResidence"%><br />
   <label for="inputImage">プロフィール画像</label><br />
   <%= f.file_field :profile_image, accept: "image/*" %><br />
   <label for="inputIntroduction">自己紹介</label><br />
