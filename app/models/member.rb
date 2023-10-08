@@ -18,6 +18,7 @@ class Member < ApplicationRecord
       member.name = "ゲスト会員"
     end
   end
+  
   def get_profile_image
     (profile_image.attached?) ? profile_image : "no_image.jpg"
   end

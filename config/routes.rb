@@ -18,7 +18,7 @@ Rails.application.routes.draw do
         patch :withdrawal
       end
     end
-    resources :posts, except: [:new] do
+    resources :posts do
       resources :comments, only: [:create,:destroy]
       resource :favorites, only: [:create,:destroy]
     end
