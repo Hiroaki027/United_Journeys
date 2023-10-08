@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     post "members/guest_sign_in", to: "members/sessions#guest_sign_in"
     resources :members,  only: [:show,:edit,:update,:withdrawal]
     resources :posts, except: [:new] do
-      resources :post_comments, only: [:create,:destroy]
+      resources :comments, only: [:create,:destroy]
       resource :favorites, only: [:create,:destroy]
     end
   end
