@@ -12,6 +12,11 @@
         <div class= "mb-auto p-2 mt-2">
           居住地: <%= @member.residence %>
         </div>
+        <div class= "mb-auto p-2 mt-2">
+          <%= link_to new_post_path(@member.id) do %>
+            <i class="fa-solid fa-circle-plus" style="color: #2460c2;"></i>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="col-8">

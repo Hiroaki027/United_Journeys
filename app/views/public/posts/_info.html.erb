@@ -1,0 +1,13 @@
+<%= form_with model: post,url: path,local: true do |f| %>
+  <div>
+    タイトル <%= f.text_field :title %>
+
+    画像  <%= f.file_field :post_images, multiple: true %><br />
+
+    内容  <%= f.text_area :content %>
+
+    言語  <%= f.text_field :language %>
+
+    <%= f.submit class: 'btn btn-success btn-block mt-2' %>
+  </div>
+<% end %>

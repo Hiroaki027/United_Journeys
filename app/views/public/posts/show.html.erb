@@ -1,2 +1,33 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<div class= "container">
+  <h2>投稿詳細</h2>
+  <div class= "row">
+    <%= @post.title %>
+    <div class= "col">
+      <%= image_tag @member.get_profile_image, size:'50x50' %>
+    </div>
+    <div class= "col">
+      ユーザー名<%= link_to member_path(@member.id) do %>
+        <%= @member.nick_name %>
+      <% end %>
+    </div>
+    <div class= "col">
+      居住地: <%= @member.residence %>
+    </div>
+    <div class= "col">
+    <% if @post.post_images.attached? %>
+      <% @post.post_images.each do |f| %>
+        <%= image_tag f.variant(resize: '150x150') %>
+      <% end %>
+    <% end %>
+    </div>
+    <div class= "col">
+      <%= @post.content %>
+    </div>
+    <div class= "col">
+      <%= link_to "投稿編集", edit_post_path(@post.id) %>
+    </div>
+    <div class= "col">
+      <%= link_to "投稿削除", post_path(@post.id),method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    </div>
+  </div>
+</div>
