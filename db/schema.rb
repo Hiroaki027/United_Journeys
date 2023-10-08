@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 2023_10_08_053558) do
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
+
   create_table "post_tags", force: :cascade do |t|
     t.integer "member_id", null: false
     t.integer "tag_id", null: false
