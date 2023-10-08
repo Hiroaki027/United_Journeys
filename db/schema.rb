@@ -60,14 +60,14 @@ ActiveRecord::Schema.define(version: 2023_10_05_102649) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.string "last_name"
-    t.string "first_name"
-    t.string "nick_name"
-    t.string "residence"
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "nick_name", null: false
+    t.string "residence", null: false
     t.string "introduction"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.boolean "is_deleted"
+    t.boolean "is_deleted", default: false, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 2023_10_05_102649) do
   create_table "post_comments", force: :cascade do |t|
     t.integer "member_id"
     t.integer "post_id"
-    t.string "comment"
+    t.string "comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -94,16 +94,16 @@ ActiveRecord::Schema.define(version: 2023_10_05_102649) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "member_id"
-    t.string "title"
-    t.text "content"
-    t.string "language"
+    t.string "title", null: false
+    t.text "content", null: false
+    t.string "language", null: false
     t.integer "public_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
