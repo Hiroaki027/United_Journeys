@@ -1,4 +1,5 @@
 class Public::MembersController < ApplicationController
+  before_action :ensure_guest_user, only: [:edit] #下記に定義したensure_guest_userでurlからもeditへ遷移できないように制限
   def show
     @member = Member.find(params[:id])
   end
@@ -29,5 +30,11 @@ class Public::MembersController < ApplicationController
   def member_params
     params.require(:member).permit(:last_name, :first_name, :nick_name, :email, :introduction, :residence)
   end
-
+  
+  def ensure_guest_user
+    @member = Member.find(params[:id])
+    if @member.guest_member?
+      redirect_to member_path(current_member) , notice: "ゲスト会員はプロフィール編集画面へ遷移できません。"
+    end
+  end  
 end

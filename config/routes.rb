@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
-    post "members/guest_sign_in", to: "members/sessions#guest_sign_in"
+    devise_scope :member do
+      post "members/guest_sign_in", to: "sessions#guest_sign_in"
+    end
     resources :members,  only: [:show,:edit,:update] do
       member do
         patch :withdrawal
