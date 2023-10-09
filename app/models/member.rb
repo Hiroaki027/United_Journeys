@@ -9,6 +9,7 @@ class Member < ApplicationRecord
   has_many :comments, dependent: :destroy
   
   has_one_attached :profile_image
+  acts_as_taggable_on :tags # gem:acts_as_taggableの使用
   
   GUEST_MEMBER_EMAIL = "guest@example.com"
 
