@@ -10,4 +10,18 @@ class Post < ApplicationRecord
   def favorited_by?(member) #特定のmemberがいいね(favorite)しているか
     favorites.exists?(member_id: member.id) #recordにmember_idと引数として渡されているmember.idが合致のものが存在しているか
   end
+  
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @post = Post.where("title LIKE?", "#{word}")
+    elsif search == "forward_match"
+      @post = Post.where("title LIKE?", "#{word}%")
+    elsif search == "backward_match"
+      @post = Post.where("title LIKE?", "%#{word}")
+    elsif search == "partial_match"
+      @post = Post.where("title LIKE?", "%#{word}%")
+    else
+      @post = Post.all
+    end
+  end
 end
