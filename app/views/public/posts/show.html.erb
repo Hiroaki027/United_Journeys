@@ -23,14 +23,24 @@
     <div class= "col">
       <%= @post.content %>
     </div>
-    <div id= "favorite_buttons_<%= post.id %>">
-      <%= render "public/favorites/favorite", post: post %>
+    <div id= "favorite_buttons_<%= @post.id %>">
+      <%= render "public/favorites/favorite", post: @post %>
     </div>
-    <div class= "col">
-      <%= link_to "投稿編集", edit_post_path(@post.id) %>
+    <div>コメント数:<span id= "comment_count"><%= @post.comments.count %></span>
+      <% if @post.member == current_member %>
+        <div class= "col">
+          <%= link_to "投稿編集", edit_post_path(@post.id) %>
+        </div>
+        <div class= "col">
+          <%= link_to "投稿削除", post_path(@post.id),method: :delete, "data-confirm" => "本当に削除しますか？" %>
+        </div>
+      <% end %>
     </div>
-    <div class= "col">
-      <%= link_to "投稿削除", post_path(@post.id),method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <div id= "post-comments">
+      <%= render "public/comments/comment",{ post: @post, comment: @comment} %>
+    </div>
+    <div id= "comment-form">
+      <%= render "public/comments/comment_form",{ post: @post, comment: @comment} %>
     </div>
   </div>
 </div>
