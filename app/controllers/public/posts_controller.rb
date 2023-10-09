@@ -20,6 +20,7 @@ class Public::PostsController < ApplicationController
     @post = Post.new
     @posts = Post.all
     @member = current_member
+    @tags = @post.tag_counts_on(:tags)
   end
 
   def edit
@@ -32,6 +33,7 @@ class Public::PostsController < ApplicationController
     @member = @post.member
     @post_new = Post.new
     @comment = Comment.new
+    @tags = @post.tag_counts_on(:tags)
   end
 
   def update
@@ -53,6 +55,6 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title,:content,:language, post_images: [])
+    params.require(:post).permit(:title,:content,:language,:tag_list, post_images: [])
   end
 end

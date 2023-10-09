@@ -36,6 +36,19 @@
         </div>
       <% end %>
     </div>
+    <div class="tags">
+      <% if @tags.present? %>
+        <div class="d-flex flex-wrap">
+          <% @tags.each do |tag| %>
+          	<span class="badge badge-info mr-2 mb-2">
+          	  <%= link_to "#{tag.name}(#{tag.taggings_count})", tag_path(tag),class: "text-white"%>
+          	</span>
+          <% end %>
+        </div>
+      <% else %>
+        <p>登録されているタグはありません</p>
+      <% end %>
+    </div>
     <div id= "post-comments">
       <%= render "public/comments/comment",{ post: @post, comment: @comment} %>
     </div>
