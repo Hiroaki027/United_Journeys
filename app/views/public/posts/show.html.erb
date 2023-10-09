@@ -23,6 +23,9 @@
     <div class= "col">
       <%= @post.content %>
     </div>
+    <div id= "favorite_buttons_<%= post.id %>">
+      <%= render "public/favorites/favorite", post: post %>
+    </div>
     <div class= "col">
       <%= link_to "投稿編集", edit_post_path(@post.id) %>
     </div>
