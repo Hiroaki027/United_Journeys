@@ -7,6 +7,10 @@
     内容  <%= f.text_area :content %>
 
     言語  <%= f.text_field :language %>
+    
+    <%= f.label :tag_list, "Tag", class: "form-label" %>
+    
+    <%= f.text_field :tag_list, value: post.tag_list.join(","), class: "form-control", data: { role: "tagsinput" } %>
 
     <%= f.submit class: 'btn btn-success btn-block mt-2' %>
   </div>

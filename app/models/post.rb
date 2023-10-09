@@ -3,8 +3,8 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
   
-  has_many_attached :post_images
-  
+  has_many_attached :post_images #Avtive storageの導入により使用できる
+  acts_as_taggable_on :tags # gem:acts_as_taggableの使用
   enum public_flag: {public: 0, draft: 1,private: 2},_prefix: true
   
   def favorited_by?(member) #特定のmemberがいいね(favorite)しているか
