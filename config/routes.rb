@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  devise_for :members,controllers: {
+  devise_for :members,skip: [:passwords] ,controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
@@ -12,9 +12,14 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
-    resources :members,  only: [:show,:edit,:update,:withdrawal]
-    resources :posts, except: [:new] do
-      resources :post_comments, only: [:create,:destroy]
+    post "members/guest_sign_in", to: "members/sessions#guest_sign_in"
+    resources :members,  only: [:show,:edit,:update] do
+      member do
+        patch :withdrawal
+      end
+    end
+    resources :posts do
+      resources :comments, only: [:create,:destroy]
       resource :favorites, only: [:create,:destroy]
     end
   end

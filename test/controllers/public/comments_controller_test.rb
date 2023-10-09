@@ -1,6 +1,6 @@
 require "test_helper"
 
-class PostCommentTest < ActiveSupport::TestCase
+class Public::CommentsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
