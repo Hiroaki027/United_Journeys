@@ -30,6 +30,8 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @member = @post.member
+    @post_new = Post.new
+    @comment = Comment.new
   end
 
   def update

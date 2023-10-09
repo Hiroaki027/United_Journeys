@@ -1,0 +1,11 @@
+  <% post.comments.each do |comment| %>
+    <div>
+      <%= link_to(comment.member) do %>
+        <%= comment.member.nick_name %>
+      <% end %>
+    </div>
+    <div><%= comment.comment %></div>
+    <% if comment.member == current_member %>
+      <div><%= link_to '削除', post_comment_path(comment.post, comment), method: :delete, local: true, class: "btn btn-sm btn-danger"%></div>
+    <% end %>
+  <% end %>

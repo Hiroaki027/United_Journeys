@@ -5,7 +5,7 @@ class Member < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
   has_many :posts, dependent: :destroy
-  has_many :favorites, dependent: :nullify
+  has_many :favorites, dependent: :nullify #該当のmemberが退会しても投稿に対してのいいねを残す為 nullifyでmemberがnullでもrecordとしてfavoritesは残る　
   has_many :comments, dependent: :destroy
   
   has_one_attached :profile_image
