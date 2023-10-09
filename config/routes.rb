@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :members,  only: [:show,:edit,:update] do
       member do
         patch :withdrawal
+        get :favorites
       end
     end
     resources :posts do
