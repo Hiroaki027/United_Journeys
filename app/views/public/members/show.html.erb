@@ -4,11 +4,13 @@
     <div class= "d-flex align-items-start" style="height: 200px;">
       <%= image_tag @member.get_profile_image %>
       <div class= "d-flex align-items-start flex-column">
+      <% unless @member.guest_member? %>
         <div class= "mb-auto p-2">
           <%= link_to  edit_member_path(@member.id), class: 'btn btn-outline-secondary btn-block' do%>
             <i class="fa-solid fa-user-cog"></i>
           <% end %>
         </div>
+      <% end %>
         <div class= "mb-auto p-2 mt-2">
           居住地: <%= @member.residence %>
         </div>

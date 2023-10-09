@@ -15,8 +15,15 @@ class Member < ApplicationRecord
   def self.guest
     find_or_create_by!(email: GUEST_MEMBER_EMAIL) do |member|
       member.password = SecureRandom.urlsafe_base64
-      member.name = "ゲスト会員"
+      member.last_name = "ゲスト"
+      member.first_name = "会員"
+      member.nick_name = "ゲスト会員"
+      member.residence = "地球"
     end
+  end
+  
+  def guest_member?
+    email == GUEST_MEMBER_EMAIL
   end
   
   def get_profile_image
