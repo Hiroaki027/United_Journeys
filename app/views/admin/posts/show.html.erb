@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 justify-content-center">
+      <% if @post.post_images.attached? %>
+        <% @post.post_images.each do |post| %>
+          <%= image_tag post.variant(resize: '150x150') %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+  </div>
+   <div id= "post-comments">
+      <%= render "public/comments/comment",{ post: @post, comment: @comment} %>
+    </div>
+</div>

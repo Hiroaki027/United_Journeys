@@ -8,4 +8,7 @@
     <% if comment.member == current_member %>
       <div><%= link_to '削除', post_comment_path(comment.post, comment), method: :delete, local: true, class: "btn btn-sm btn-danger"%></div>
     <% end %>
+    <% if admin_signed_in? %>
+      <div><%= link_to '削除', admin_post_comment_path(comment.post, comment), method: :delete, local: true, class: "btn btn-sm btn-danger"%></div>
+    <% end %>
   <% end %>

@@ -1,4 +1,5 @@
 class Public::MembersController < ApplicationController
+  before_action :authenticate_member!, except: [:top, :admin]
   before_action :ensure_guest_user, only: [:edit] #下記に定義したensure_guest_userでurlからもeditへ遷移できないように制限
 
   def show
