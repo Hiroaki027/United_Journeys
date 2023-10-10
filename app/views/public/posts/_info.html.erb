@@ -1,9 +1,23 @@
 <%= form_with model: post,url: path,local: true do |f| %>
   <div>
     タイトル <%= f.text_field :title %>
-
+  
     画像  <%= f.file_field :post_images, multiple: true %><br />
-
+ 
+    <% if post.post_images.attached? %>
+      <p>選択済みの画像（削除する画像にチェックをつけてください）</p>
+      <div style="display: flex; flex-wrap: wrap; width: 750px;">
+      <% post.post_images.each do |image| %>
+        <div style="display: flex; margin:5px 5px 5px 0;">
+          <%= f.check_box :image_ids, { multiple: true }, image.id, false %>
+          <label for="post_image_ids_<%= image.id %>" > 
+            <%= image_tag image, size: '300x200' %>
+          </label>
+        </div>
+      <% end %>
+      </div>
+    <% end %>
+  
     内容  <%= f.text_area :content %>
 
     言語  <%= f.text_field :language %>
@@ -15,3 +29,4 @@
     <%= f.submit class: 'btn btn-success btn-block mt-2' %>
   </div>
 <% end %>
+
