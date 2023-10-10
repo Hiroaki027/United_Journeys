@@ -9,7 +9,7 @@ Admin.create!(
   email: 'admin@admin',
   password: 'admin1'
   ) #admin用
-  
+
 # タグの作成
 tags = %w(アメリカ 韓国 イギリス オーストラリア スペイン カナダ ドイツ)
 tags.each { |tag_name| ActsAsTaggableOn::Tag.find_or_create_by(name: tag_name) }
@@ -39,6 +39,13 @@ post1 = Post.new(
 )
 post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/USA.png')), filename: 'USA.png')
 post1.save!
+post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Italy.png')), filename: 'Italy.png')
+post1.save!
+post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Germany.png')), filename: 'Germany.png')
+post1.save!
+post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Spain.png')), filename: 'Spain.png')
+post1.save!
+
 
 post2 = Post.new(
   title: "Italy",
@@ -122,7 +129,7 @@ post10.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Brazi
 post10.save!
 
 
-10.times do |n|
+7.times do |n|
   Comment.create!(
     member_id: n+1,
     post_id: n+1,
