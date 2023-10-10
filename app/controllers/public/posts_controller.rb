@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_member!, except: [:top, :admin]
   def new
     @post = Post.new
     @post.save

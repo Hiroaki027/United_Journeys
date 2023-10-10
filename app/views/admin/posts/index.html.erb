@@ -1,0 +1,32 @@
+<div class= "container">
+  <div class= "row">
+    <div class= "col-md-10 offset-md-1">
+      <h2>投稿一覧<i class="fa-solid fa-user-group ml-2"></i></h2>
+      <table class= "table table-hover">
+        <tr>
+          <th>タイトル</th>
+          <th></th>
+        </tr>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= post.title %></td>
+            <td><%= post.member.nick_name %></td>
+            <td><%= post.created_at.strftime('%Y/%m/%d/%H:%M') %></td>
+            <!--<td>%= image_tag post.post_images[0].variant(resize: '150x150') %></td>-->
+            <td>コメント数:<%= post.comments.count %></td>
+            <td id= "favorite_buttons_<%= post.id %>">
+              <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+              <span style="color: red;"><%= post.favorites.count %></span>
+            </td>
+            <td>
+              <% post.tag_list.first(2).each do |tag| %>
+                <span class="tag-btn ml-3"><%= link_to tag, tag_path(tag) %></span>
+              <% end %>
+            </td>
+            <td><%= link_to "投稿詳細",admin_post_path(post) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

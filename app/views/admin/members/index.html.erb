@@ -1,0 +1,20 @@
+<div class= "container">
+  <div class= "row">
+    <div class= "col-md-8 offset-md-1">
+      <h2>会員一覧<i class="fa-solid fa-user-group ml-2"></i></h2>
+      <table class= "table table-hover">
+        <tr>
+          <th>会員画像</th>
+          <th>ユーザー名</th>
+        </tr>
+        <% @members.each do |member| %>
+          <tr>
+            <td><%= image_tag member.get_profile_image %></td>
+            <td><%= member.nick_name %></td>
+            <td><%= link_to "会員詳細",admin_member_path(member) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

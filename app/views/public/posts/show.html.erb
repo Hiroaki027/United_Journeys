@@ -15,8 +15,8 @@
     </div>
     <div class= "col">
     <% if @post.post_images.attached? %>
-      <% @post.post_images.each do |f| %>
-        <%= image_tag f.variant(resize: '150x150') %>
+      <% @post.post_images.each do |post| %>
+        <%= image_tag post.variant(resize: '150x150') %>
       <% end %>
     <% end %>
     </div>
