@@ -8,14 +8,10 @@ class Admin::MembersController < ApplicationController
   end
   
   def update
-    @member = current_member
-    if @member.update(member_params)
-      flash[:notice] = "会員情報を変更しました。"
-      redirect_to member_path(current_member)
-    else
-      flash[:notice] = "変更内容が正しくありません。"
-      redirect_to edit_member_path
-    end
+    @member =  Member.find(params[:id])
+    @member.update(member_params)
+    flash[:notice] = "会員情報を変更しました。"
+    redirect_to admin_members_path
   end
   
   private
