@@ -14,7 +14,6 @@
           <td><%= post.title %></td>
           <td><%= post.member.nick_name %></td>
           <td><%= post.created_at.strftime('%Y/%m/%d/%H:%M') %></td>
-          <!--<td>%= image_tag post.post_images[0].variant(resize: '150x150') %></td>-->
           <td>コメント数:<%= post.comments.count %></td>
           <td id= "favorite_buttons_<%= post.id %>">
             <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
