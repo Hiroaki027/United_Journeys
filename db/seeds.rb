@@ -41,10 +41,7 @@ post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/USA.pn
 post1.save!
 post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Italy.png')), filename: 'Italy.png')
 post1.save!
-post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Germany.png')), filename: 'Germany.png')
-post1.save!
-post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Spain.png')), filename: 'Spain.png')
-post1.save!
+
 
 
 post2 = Post.new(

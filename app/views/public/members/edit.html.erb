@@ -1,6 +1,7 @@
 <h2>会員編集</h2>
 
 <%= form_with model: @member do |f| %>
+  <%= render "public/shared/error_messages", resource: @member %>
   <div>
     <label for="inputName">ユーザー名</label><br>
     <%= f.text_field :nick_name, autofocus: true, id:"inputName", placeholder:"inputName"%><br />

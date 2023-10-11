@@ -8,6 +8,11 @@ class Member < ApplicationRecord
   has_many :favorites, dependent: :nullify #該当のmemberが退会しても投稿に対してのいいねを残す為 nullifyでmemberがnullでもrecordとしてfavoritesは残る　
   has_many :comments, dependent: :destroy
   
+  validates :last_name, presence: true, length: { minimum: 1, maximum: 20 }
+  validates :first_name, presence: true, length: { minimum: 1, maximum: 20 }
+  validates :nick_name, presence: true, uniqueness: true
+  validates :residence, presence: true
+  
   has_one_attached :profile_image
   acts_as_taggable_on :tags # gem:acts_as_taggableの使用
   
