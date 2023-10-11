@@ -1,7 +1,7 @@
 <div class= "container">
   <div class= "row">
-    <div class= "col-md-8 offset-md-1">
-      <h2>会員詳細<i class="fa-solid fa-user-group ml-2"></i></h2>
+    <div class= "col-md-10 offset-md-1">
+      <h2>会員詳細 <%= image_tag @member.get_profile_image %></h2>
         <%= form_with model: @member, url: admin_member_path do |f| %>
         <table class="table table-borderless">
           <tbody>
@@ -15,7 +15,12 @@
               <td><%= f.text_field :email %></td>
             </tr>
             <tr>
-              <td>会員ステータス</td>
+              <td style="width: 10px">居住地</td>
+              <td><%= f.text_field :residence %></td>
+            </tr>
+            </tr>
+            <tr>
+              <td>退会ステータス</td>
               <td>
                 <%= f.radio_button :is_deleted, "false" %>
                 <%= f.label :is_deleted_false, "有効", class:"mr-3"%>
@@ -25,7 +30,7 @@
             </tr>
             <tr>
               <td></td>
-              <td><%= f.submit "変更を保存", class:"btn btn-success btn-lg px-5 py-3" %></td>
+              <td><%= f.submit "変更を保存", class:"btn btn-success btn-lg px-5" %></td>
             </tr>
           </tbody>
         </table>
