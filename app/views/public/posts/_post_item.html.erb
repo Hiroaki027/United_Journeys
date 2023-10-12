@@ -55,7 +55,7 @@
       <% posts.each  do |post| %>
         <tr>
           <td><%= post.title %></td>
-          <td><%= image_tag post.post_images[0].variant(resize: '50x500') %></td>
+          <td><%= image_tag post.post_images[0].variant(resize: '50x50') %></td>
           <td><%= post.member.nick_name %></td>
           <td><%= post.created_at.strftime('%Y/%m/%d/%H:%M') %></td>
           <td><%= link_to "詳細", post_path(post.id) %></td>

@@ -27,7 +27,7 @@
       
         <div class="col-md-8 mb-3 field">
           <%= f.label :email %><br />
-          <%= f.email_field :email, placeholder:"example@example.com",autofocus: true, autocomplete: "email" %>
+          <%= f.email_field :email, size: 50, placeholder:"example@example.com",autofocus: true, autocomplete: "email" %>
         </div>
       
         <div class="col-md-12 mb-3 field">
@@ -35,16 +35,16 @@
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password" %>
+          <%= f.password_field :password, size: 50, autocomplete: "new-password" %>
         </div>
       
         <div class="col-md-12 mb-3 field">
           <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          <%= f.password_field :password_confirmation, size: 50, autocomplete: "new-password" %>
         </div>
       
-        <div class="col-md-12 actions">
-          <%= f.submit "新規登録" %>
+        <div class="col-md-6 actions">
+          <%= f.submit "新規登録", class: 'btn btn-success btn-block mt-2' %>
         </div>
       <% end %>
       </div>
