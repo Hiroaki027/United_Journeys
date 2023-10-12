@@ -22,8 +22,11 @@
         <%= @member.nick_name %>
       <% end %>
       <div class= "row">
-        <div class= "col-md-12 mt-3">
+        <div class= "col-md-12 mt-2">
           居住地: <%= @member.residence %>
+        </div>
+        <div class= "col-md-12 mt-2">
+          作成日: <%= @post.created_at.strftime('%Y/%m/%d/%H:%M') %>
         </div>
       </div>
     </div>
