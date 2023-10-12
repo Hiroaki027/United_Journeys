@@ -1,4 +1,5 @@
 <%= form_with model: post,url: path,local: true do |f| %>
+  <%= render "public/shared/error_messages", resource: post %>
   <div>
     タイトル <%= f.text_field :title %>
   

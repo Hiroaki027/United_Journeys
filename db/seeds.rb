@@ -13,7 +13,7 @@ Admin.create!(
 # タグの作成
 tags = %w(アメリカ 韓国 イギリス オーストラリア スペイン カナダ ドイツ)
 tags.each { |tag_name| ActsAsTaggableOn::Tag.find_or_create_by(name: tag_name) }
-
+tag_list = tags.sample(2)
 
 # 一括で10個のユーザーデータを作成
 # 10回繰り返し処理を行う
@@ -41,11 +41,8 @@ post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/USA.pn
 post1.save!
 post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Italy.png')), filename: 'Italy.png')
 post1.save!
-post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Germany.png')), filename: 'Germany.png')
+post1.tag_list.add(tag_list)
 post1.save!
-post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Spain.png')), filename: 'Spain.png')
-post1.save!
-
 
 post2 = Post.new(
   title: "Italy",
@@ -54,6 +51,8 @@ post2 = Post.new(
   language: "イタリア語",
 )
 post2.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Italy.png')), filename: 'Italy.png')
+post2.save!
+post2.tag_list.add(tag_list)
 post2.save!
 
 post3 = Post.new(
@@ -64,6 +63,8 @@ post3 = Post.new(
 )
 post3.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Germany.png')), filename: 'Germany.png')
 post3.save!
+post3.tag_list.add(tag_list)
+post3.save!
 
 post4 = Post.new(
   title: "UK",
@@ -72,6 +73,8 @@ post4 = Post.new(
   language: "英語",
 )
 post4.post_images.attach(io: File.open(Rails.root.join('app/assets/images/UK.jpg')), filename: 'UK.jpg')
+post4.save!
+post4.tag_list.add(tag_list)
 post4.save!
 
 post5 = Post.new(
@@ -82,6 +85,8 @@ post5 = Post.new(
 )
 post5.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Spain.png')), filename: 'Spain.png')
 post5.save!
+post5.tag_list.add(tag_list)
+post5.save!
 
 post6 = Post.new(
   title: "France",
@@ -90,6 +95,8 @@ post6 = Post.new(
   language: "フランス語",
 )
 post6.post_images.attach(io: File.open(Rails.root.join('app/assets/images/France.png')), filename: 'France.png')
+post6.save!
+post6.tag_list.add(tag_list)
 post6.save!
 
 post7 = Post.new(
@@ -100,6 +107,8 @@ post7 = Post.new(
 )
 post7.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Korea.png')), filename: 'Korea.png')
 post7.save!
+post7.tag_list.add(tag_list)
+post7.save!
 
 post8 = Post.new(
   title: "Russia",
@@ -108,6 +117,8 @@ post8 = Post.new(
   language: "ロシア語",
 )
 post8.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Russia.png')), filename: 'Russia.png')
+post8.save!
+post8.tag_list.add(tag_list)
 post8.save!
 
 post9 = Post.new(
@@ -118,6 +129,8 @@ post9 = Post.new(
 )
 post9.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Australia.png')), filename: 'Australia.png')
 post9.save!
+post9.tag_list.add(tag_list)
+post9.save!
 
 post10 = Post.new(
   title: "Brazil",
@@ -127,7 +140,8 @@ post10 = Post.new(
 )
 post10.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Brazil.png')), filename: 'Brazil.png')
 post10.save!
-
+post10.tag_list.add(tag_list)
+post10.save!
 
 7.times do |n|
   Comment.create!(

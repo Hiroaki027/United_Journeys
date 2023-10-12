@@ -1,7 +1,11 @@
 class Post < ApplicationRecord
   belongs_to :member
-  has_many :favorites, dependent: :destroy
+  has_many :favorites, dependent: :destroy #dependentオプションで関連付けされたものも道連れでdestroy
   has_many :comments, dependent: :destroy
+  
+  validates :title,presence: true
+  validates :content,presence: true
+  validates :language,presence: true
   
   has_many_attached :post_images #Avtive storageの導入により使用できる
   acts_as_taggable_on :tags # gem:acts_as_taggableの使用

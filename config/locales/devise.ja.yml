@@ -29,8 +29,23 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+      post:
+        title: タイトル
+        content: 内容
+        language: 対象言語
+        created_at: 作成日
+        updated_at: 更新日
+      comment:
+        comment: コメント
+        created_at: 作成日
+        updated_at: 更新日
+      tags:
+        name: タグ名
     models:
-      member: 会員
+      member: 会員情報
+      post: 投稿
+      comment: コメント
+      tags: タグ
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
