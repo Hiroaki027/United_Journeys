@@ -58,7 +58,7 @@
         <div class="d-flex flex-wrap">
           <% @tags.each do |tag| %>
           	<span class="badge badge-info mr-2 mb-2">
-          	  <%= link_to "#{tag.name}(#{tag.taggings_count})", tag_path(tag),class: "text-white"%>
+          	  <%= link_to "#{tag.name}(#{tag.taggings_count})", tag_path(tag.name),class: "text-white"%>
           	</span>
           <% end %>
         </div>
