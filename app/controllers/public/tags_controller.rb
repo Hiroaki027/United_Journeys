@@ -1,5 +1,6 @@
 class Public::TagsController < ApplicationController
   def show
+
     @posts = Post.all
     # タグ一覧を取得
     @tags = Post.tag_counts_on(:tags)

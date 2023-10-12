@@ -1,47 +1,64 @@
 <div class= "container">
-  <h2>投稿詳細</h2>
   <div class= "row">
-    <%= @post.title %>
-    <div class= "col">
-      <%= image_tag @member.get_profile_image, size:'50x50' %>
+    <div class= "col-md-12 mt-3">
+      <% if @post.post_images.attached? %>
+        <% @post.post_images.each do |post| %>
+          <%= image_tag post.variant(resize: '500x500') %>
+        <% end %>
+      <% end %>
     </div>
-    <div class= "col">
-      ユーザー名<%= link_to member_path(@member.id) do %>
+  </div>
+  <div class= "row">
+    <div class= col-md-12>
+      <h1><%= @post.title %></h1>
+    </div>
+  </div>
+  <div class= "row">
+    <div class= "col-md-2">
+      <%= image_tag @member.get_profile_image %>
+    </div>
+    <div class= "col-md-6 mt-3">
+      ユーザー名:<%= link_to member_path(@member.id) do %>
         <%= @member.nick_name %>
       <% end %>
+      <div class= "row">
+        <div class= "col-md-12 mt-3">
+          居住地: <%= @member.residence %>
+        </div>
+      </div>
     </div>
-    <div class= "col">
-      居住地: <%= @member.residence %>
-    </div>
-    <div class= "col">
-    <% if @post.post_images.attached? %>
-      <% @post.post_images.each do |post| %>
-        <%= image_tag post.variant(resize: '150x150') %>
-      <% end %>
-    <% end %>
-    </div>
-    <div class= "col">
+  </div>
+  <div class= "row">
+    <div class= "col-md-8 border" style= "height: 200px;">
       <%= @post.content %>
     </div>
-    <div id= "favorite_buttons_<%= @post.id %>">
-      <%= render "public/favorites/favorite", post: @post %>
-    </div>
-    <div>コメント数:<span id= "comment_count"><%= @post.comments.count %></span>
-      <% if @post.member == current_member %>
-        <div class= "col">
-          <%= link_to "投稿編集", edit_post_path(@post.id) %>
-        </div>
-        <div class= "col">
-          <%= link_to "投稿削除", post_path(@post.id),method: :delete, "data-confirm" => "本当に削除しますか？" %>
-        </div>
+  <% if @post.member == current_member %>
+    <div class= "col-md-1 d-flex flex-column">
+      <%= link_to edit_post_path(@post.id), class: "mb-3" do %>
+        <i class="fa-solid fa-pen-to-square fa-2xl"></i>
+      <% end %>
+      <%= link_to post_path(@post.id),method: :delete, "data-confirm" => "本当に削除しますか？", class: "mt-3" do %>
+        <i class="fa-solid fa-trash fa-2xl"></i>
       <% end %>
     </div>
-    <div class="tags">
+  <% end %>
+    <div class= "col-md-2">
+      <%= render "public/comments/comment_form",{ post: @post, comment: @comment} %>
+    </div>
+  </div>
+  <div class= "row justify-content-center">
+    <div class= "col-md-1 px-0">
+       <%= render "public/favorites/favorite", post: @post %>
+    </div>
+    <div class= "col-md-2 px-0">
+      コメント数:<span id= "comment_count"><%= @post.comments.count %>
+    </div>
+    <div class="tags my-1">
       <% if @tags.present? %>
         <div class="d-flex flex-wrap">
           <% @tags.each do |tag| %>
           	<span class="badge badge-info mr-2 mb-2">
-          	  <%= link_to "#{tag.name}(#{tag.taggings_count})", tag_path(tag),class: "text-white"%>
+          	  <%= link_to "#{tag.name}(#{tag.taggings_count})", tag_path(tag.name),class: "text-white"%>
           	</span>
           <% end %>
         </div>
@@ -49,11 +66,8 @@
         <p>登録されているタグはありません</p>
       <% end %>
     </div>
-    <div id= "post-comments">
-      <%= render "public/comments/comment",{ post: @post, comment: @comment } %>
-    </div>
-    <div id= "comment-form">
-      <%= render "public/comments/comment_form",{ post: @post, comment: @comment} %>
-    </div>
+  </div>
+  <div class= "row mt-3">
+    <%= render "public/comments/comment",{ post: @post, comment: @comment } %>
   </div>
 </div>
