@@ -20,6 +20,7 @@ class Public::PostsController < ApplicationController
     @post = Post.new
     @posts = Post.all
     @member = current_member
+
     @tags = @post.tag_counts_on(:tags)
   end
 
