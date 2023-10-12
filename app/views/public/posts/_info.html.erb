@@ -1,49 +1,43 @@
-<div class= "container">
+<%= form_with model: post,url: path,local: true do |f| %>
+  <%= render "public/shared/error_messages", resource: post %>
   <div class= "row">
-    <div class= "col-md-8 offset-2">
-      <%= form_with model: post,url: path,local: true do |f| %>
-        <%= render "public/shared/error_messages", resource: post %>
-      <div class= "row row-justify-content-center">
-        <div class= "col-md-12">
-          <label for="Title">タイトル</label><br>
-          <%= f.text_field :title, autofocus: true, id:"Title", placeholder:"タイトル"%><br />
+    <div class= "col-md-12 my-3">
+      <label for="Title">タイトル</label><br>
+      <%= f.text_field :title, autofocus: true, id:"Title", placeholder:"タイトル"%><br />
+    </div>
+    <div class= "col-md-12 mb-3">
+      <label for="Post_images">画像</label><br>
+      <%= f.file_field :post_images, multiple: true, id:"Post_images" %><br />
+    </div>
+    <div class= "col-md-12 mb-3"> 
+      <% if post.post_images.attached? %>
+        <p>選択済みの画像（削除する画像にチェックをつけてください）</p>
+        <div style="display: flex; flex-wrap: wrap; width: 750px;">
+        <% post.post_images.each do |image| %>
+          <div style="display: flex; margin:5px 5px 5px 0;">
+            <%= f.check_box :image_ids, { multiple: true }, image.id, false %>
+            <label for="post_image_ids_<%= image.id %>" > 
+              <%= image_tag image, size: '300x200' %>
+            </label>
+          </div>
+        <% end %>
         </div>
-        <div class= "col-md-12">
-          <label for="Post_images">画像</label><br>
-          <%= f.file_field :post_images, multiple: true, id:"Post_images" %><br />
-        </div>
-        <div class= "col-md-12"> 
-          <% if post.post_images.attached? %>
-            <p>選択済みの画像（削除する画像にチェックをつけてください）</p>
-            <div style="display: flex; flex-wrap: wrap; width: 750px;">
-            <% post.post_images.each do |image| %>
-              <div style="display: flex; margin:5px 5px 5px 0;">
-                <%= f.check_box :image_ids, { multiple: true }, image.id, false %>
-                <label for="post_image_ids_<%= image.id %>" > 
-                  <%= image_tag image, size: '300x200' %>
-                </label>
-              </div>
-            <% end %>
-            </div>
-          <% end %>
-        </div>
-        <div class= "col-md-12">
-          <label for="Content">内容</label><br>
-          <%= f.text_area :content, rows: '5', cols: '80', autofocus: true, id:"Content", placeholder:"内容をここに" %>
-        </div>
-        <div class= "col-md-6">
-          <label for="Language">言語</label><br>
-          <%= f.text_field :language, autofocus: true, id:"Language", placeholder:"例: 日本語" %>
-        </div>
-        <div class="form-group form-group_tags">
-          <%= f.label :tag_list, "Tag", class: "form-label" %>
-          <%= f.text_field :tag_list, value: post.tag_list.join(","), class: "form-control", data: { role: "tagsinput" } %>
-        </div>
-        <div class="col-md-3">
-          <%= f.submit class: 'btn btn-success btn-block mt-2' %>
-        </div>
-      </div>
       <% end %>
     </div>
+    <div class= "col-md-12 mb-3">
+      <label for="Content">内容</label><br>
+      <%= f.text_area :content, rows: '5', cols: '80', autofocus: true, id:"Content", placeholder:"内容をここに" %>
+    </div>
+    <div class= "col-md-3">
+      <label for="Language">言語</label><br>
+      <%= f.text_field :language, autofocus: true, id:"Language", placeholder:"例: 日本語" %>
+    </div>
+    <div class="form-group form-group_tags col-md-9">
+      <%= f.label :tag_list, "Tag", class: "form-label" %>
+      <%= f.text_field :tag_list, value: post.tag_list.join(","), class: "form-control", data: { role: "tagsinput" } %>
+    </div>
+    <div class="col-md-3">
+      <%= f.submit class: 'btn btn-success btn-block mt-2' %>
+    </div>
   </div>
-</div>
+<% end %>

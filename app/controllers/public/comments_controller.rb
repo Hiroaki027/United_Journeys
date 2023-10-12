@@ -5,7 +5,7 @@ class Public::CommentsController < ApplicationController
     comment = current_member.comments.new(comment_params)
     comment.post_id = post.id
     if comment.save
-      redirect_to post_path(post)
+      redirect_to request.referer
     end
   end
 
@@ -13,7 +13,7 @@ class Public::CommentsController < ApplicationController
     post = Post.find(params[:post_id])
     comment = post.comments.find(params[:id])
     comment.destroy
-    redirect_to post_path(params[:post_id])
+    redirect_to request.referer
   end
 
   private
