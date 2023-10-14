@@ -1,0 +1,12 @@
+<div class= "container">
+  <div class= "row">
+    <div class= "col-md-8 offset-2">
+      <h2><%= @member.nick_name %>のフォロワー覧</h2>
+      <% if @members.exists? %>
+        <%= render "public/members/index", members: @members %>
+      <% else %>
+        <p>ユーザーはいません</p>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,10 @@ class Public::MembersController < ApplicationController
   def show
     @member = Member.find(params[:id])
     @posts = Post.all
-
+  end
+  
+  def index
+    @members = Member.all
   end
 
   def edit
