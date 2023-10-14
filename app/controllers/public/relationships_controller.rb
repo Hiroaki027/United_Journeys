@@ -15,11 +15,13 @@ class Public::RelationshipsController < ApplicationController
   
   def followings
     member = Member.find(params[:member_id])
+    @member = Member.find(params[:member_id])
     @members = member.followings
   end
   
   def followers
     member = Member.find(params[:member_id])
-    @member = member.followers
+    @member = Member.find(params[:member_id])
+    @members = member.followers
   end
 end
