@@ -7,9 +7,9 @@
       <div class="message" style="width: 400px;">
         <% @chats.each do |chat| %>
           <% if chat.member_id == current_member.id %>
-            <p style="text-align: right;"><%= image_tag @member.get_profile_image %><%= chat.message %></p>
+            <p style="text-align: right;"><%= image_tag chat.member.get_profile_image %><%= chat.message %></p>
           <% else %>
-            <p style="text-align: left;"><%= image_tag @member.get_profile_image %><%= chat.message %></p>
+            <p style="text-align: left;"><%= image_tag chat.member.get_profile_image %><%= chat.message %></p>
           <% end %>
         <% end %>
       </div>
