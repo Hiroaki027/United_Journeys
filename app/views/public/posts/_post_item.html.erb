@@ -56,7 +56,11 @@
         <tr>
           <td><%= post.title %></td>
           <td><%= image_tag post.post_images[0].variant(resize: '50x50') %></td>
-          <td><%= post.member.nick_name %></td>
+          <td>
+            <%= link_to member_path(post.member.id) do %>
+              <%= post.member.nick_name %>
+            <% end %>
+          </td>
           <td><%= post.created_at.strftime('%Y/%m/%d/%H:%M') %></td>
           <td><%= link_to "詳細", post_path(post.id) %></td>
           <td id= "favorite_buttons_<%= post.id %>">
