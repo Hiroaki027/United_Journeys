@@ -1,7 +1,7 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_member!, except: [:top, :admin]
   def new
     @post = Post.new
-    @post.save
   end
 
   def create
@@ -20,6 +20,8 @@ class Public::PostsController < ApplicationController
     @post = Post.new
     @posts = Post.all
     @member = current_member
+
+    @tags = @post.tag_counts_on(:tags)
   end
 
   def edit
@@ -30,6 +32,9 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @member = @post.member
+    @post_new = Post.new
+    @comment = Comment.new
+    @tags = @post.tag_counts_on(:tags)
   end
 
   def update
@@ -40,6 +45,12 @@ class Public::PostsController < ApplicationController
     else
       render :edit
     end
+    if params[:post][:image_ids]
+      params[:post][:image_ids].each do |image_id|
+        image = @post.post_images.find(image_id)
+        image.purge
+      end
+    end
   end
 
   def destroy
@@ -47,10 +58,14 @@ class Public::PostsController < ApplicationController
     post.destroy
     redirect_to posts_path
   end
+  
+  def search
+    @posts = Post.looks(params[:search],params[:word])
+  end
 
   private
 
   def post_params
-    params.require(:post).permit(:title,:content,:language, post_images: [])
+    params.require(:post).permit(:title,:content,:language,:tag_list, post_images: [])
   end
 end

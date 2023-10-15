@@ -12,15 +12,36 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
-    post "members/guest_sign_in", to: "members/sessions#guest_sign_in"
-    resources :members,  only: [:show,:edit,:update] do
+    resources :chats, only: [:show, :create]
+    
+    devise_scope :member do
+      post "members/guest_sign_in", to: "sessions#guest_sign_in"
+    end
+
+    resources :members,  only: [:index,:show,:edit,:update] do
+      resource :relationships, only: [:create, :destroy]
+        get "followings" => "relationships#followings", as: "followings"
+  	    get "followers" => "relationships#followers", as: "followers"
       member do
         patch :withdrawal
+        get :favorites
       end
     end
+
     resources :posts do
       resources :comments, only: [:create,:destroy]
       resource :favorites, only: [:create,:destroy]
+      collection do
+        get :search
+      end
+    end
+    resources :tags, only: [:show]
+  end
+
+  namespace :admin do
+    resources :members, except: [:new, :create, :edit]
+    resources :posts, only: [:show, :index, :destroy] do
+      resources :comments, only: [:destroy]
     end
   end
 end

@@ -1,0 +1,3 @@
+<!--view内の class= "errors"に対してhtmlメソッドで()内のものを取得-->
+<!--html()内のj()のjはescape_javascriptのエイリアス　= 省略形-->
+$('.errors').html("<%= j(render 'public/shared/error_messages', resource: @chat) %>");

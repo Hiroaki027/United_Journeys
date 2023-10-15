@@ -1,13 +1,27 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
+    <% if member_signed_in? %>
       <a class="navbar-brand" href="/"><span>UnitedJourneys</span></a>
+    <% else %>
+      <span class="navbar-brand">UnitedJourneys</span>
+    <% end %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-        <% if member_signed_in? %>
+          <% if admin_signed_in? %>
+          <li class="nav-item mr-3">
+            <%= link_to "投稿一覧", admin_posts_path, class: "nav-link text-light" %>
+          </li>
+          <li class="nav-item mr-3">
+            <%= link_to "会員一覧", admin_members_path, class: "nav-link text-light" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-light" %>
+          </li>
+        <% elsif member_signed_in? %>
           <li>
             <%= link_to member_path(current_member),class: 'nav-link text-light' do %>
               <i class="fas fa-home"></i> マイページ
@@ -15,7 +29,7 @@
           </li>
           <li>
             <%= link_to posts_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-users"></i> 投稿一覧 
+              <i class="fas fa-users"></i> みんなの投稿
             <% end %>
           </li>
           <li>
@@ -40,11 +54,20 @@
             <% end %>
           </li>
           <li>
-             <%= link_to "ゲストログイン", members_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
+             <%= link_to "ゲストログイン", members_guest_sign_in_path, class: "nav-link text-light", method: :post %>
           </li>
         <% end %>
         </ul>
       </div>
+      <% if member_signed_in? %>
+        <div class="search_form">
+          <%= form_with url: search_posts_path, local: true, method: :get do |f| %>
+            <%= f.text_field :word %>
+            <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
+            <%= f.submit "検索", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </nav>
 </header>
