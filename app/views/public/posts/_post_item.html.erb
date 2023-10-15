@@ -24,7 +24,7 @@
           <td><%= post.created_at.strftime('%Y/%m/%d/%H:%M') %></td>
         <% end %>
           <td><%= link_to "詳細", post_path(post.id) %></td>
-          <td id= "favorite_buttons_<%= post.id %>">
+          <td id= "favorite_btn_<%= post.id %>">
             <%= render "public/favorites/favorite", post: post %>
           </td>
           <td>コメント数:<%= post.comments.count %></td>
@@ -63,7 +63,7 @@
           </td>
           <td><%= post.created_at.strftime('%Y/%m/%d/%H:%M') %></td>
           <td><%= link_to "詳細", post_path(post.id) %></td>
-          <td id= "favorite_buttons_<%= post.id %>">
+          <td id= "favorite_btn_<%= post.id %>">
             <%= render "public/favorites/favorite", post: post %>
           </td>
           <td>コメント数:<%= post.comments.count %></td>

@@ -51,7 +51,9 @@
   </div>
   <div class= "row justify-content-center">
     <div class= "col-md-1 px-0">
-       <%= render "public/favorites/favorite", post: @post %>
+      <div id= "favorite_btn_<%= @post.id %>">
+        <%= render "public/favorites/favorite", post: @post %>
+      </div>
     </div>
     <div class= "col-md-2 px-0">
       コメント数:<span id= "comment_count"><%= @post.comments.count %>
