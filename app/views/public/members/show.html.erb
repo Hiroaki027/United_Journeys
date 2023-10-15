@@ -1,7 +1,7 @@
 <div class= "container">
   <div class= "row">
     <div class= "col-md-3">
-      <div class= "row">
+      <div class= "row mt-3">
         <h2>会員情報<i class="fa-solid fa-address-book ml-2"></i></h2>
       </div>
       <div class= "row">
@@ -32,9 +32,11 @@
         </div>
       </div>
       <div class= "row border">
-        <div class= "col-md-4 my-3">
-          <%= link_to new_post_path(@member.id) do %>
-            <i class="fa-solid fa-circle-plus fa-2xl" style="color: #2460c2;"></i>
+        <div class= "col-md-4 my-3 py-2">
+          <% if current_member == @member %>
+            <%= link_to new_post_path(@member.id) do %>
+              <i class="fa-solid fa-circle-plus fa-2xl" style="color: #2460c2;"></i>
+            <% end %>
           <% end %>
         </div>
         <div class= "align-self-center col-md-8">
@@ -46,12 +48,17 @@
           フォロー数: <%= link_to @member.followings.count, member_followings_path(@member) %>&emsp;&emsp;
           フォロワー数: <%= link_to @member.followers.count, member_followers_path(@member) %>
         </div>
-        <div class= "col-8 offset-2 mt-1">
+        <div class= "col-md-12 mt-1">
           <%= render "public/relationships/btn", member: @member, options: { class: ""} %>
+        </div>
+        <div class= "col-md-12 mt-1">
+          <% if current_member != @member && current_member.following?(@member) && @member.following?(current_member) %>
+            <%= link_to 'チャットを始める', chat_path(@member.id), class: "btn btn-primary" %>
+          <% end %>
         </div>
       </div>
     </div>
-    <div class= "col-md-9">
+    <div class= "col-md-9 mt-3">
       <%= render 'public/posts/post_item' , posts: @posts , member: @member %>
     </div>
   </div>

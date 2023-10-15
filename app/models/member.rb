@@ -15,6 +15,9 @@ class Member < ApplicationRecord
   has_many :followings, through: :active_relationships, source: :followed
   # フォロワーを取得
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :member_rooms
+  has_many :chats
+  has_many :rooms, through: :member_rooms #member_rooms(中間テーブル)を経由してroomへ
 
   validates :last_name, presence: true, length: { minimum: 1, maximum: 20 }
   validates :first_name, presence: true, length: { minimum: 1, maximum: 20 }
@@ -44,12 +47,12 @@ class Member < ApplicationRecord
     (profile_image.attached?) ? profile_image : "no_image.jpg"
   end
   
-  # 指定したユーザーをフォローする
+  # 指定したメンバーをフォローする
   def follow(member)
     active_relationships.create(followed_id: member.id)
   end
   
-  # 指定したユーザーのフォローを解除する
+  # 指定したメンバーのフォローを解除する
   def unfollow(member)
     active_relationships.find_by(followed_id: member.id).destroy
   end
