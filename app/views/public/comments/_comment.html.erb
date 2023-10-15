@@ -7,9 +7,9 @@
   <div class= "col-md-11 text-break border"><%= comment.comment %></div>
   <div class= "col-md-1">
     <% if comment.member == current_member %>
-      <%= link_to '削除', post_comment_path(comment.post, comment), method: :delete, local: true, class: "btn btn-sm btn-danger ml-3"%>
+      <%= link_to '削除', post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-sm btn-danger ml-3"%>
     <% elsif admin_signed_in? %>
-      <%= link_to '削除', admin_post_comment_path(comment.post, comment), method: :delete, local: true, class: "btn btn-sm btn-danger ml-3"%>
+      <%= link_to '削除', admin_post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-sm btn-danger ml-3"%>
     <% end %>
   </div>
 <% end %>

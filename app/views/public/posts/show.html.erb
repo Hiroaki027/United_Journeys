@@ -46,7 +46,7 @@
     </div>
   <% end %>
     <div class= "col-md-2">
-      <%= render "public/comments/comment_form",{ post: @post, comment: @comment} %>
+      <%= render "public/comments/comment_form", post: @post, comment: @comment %>
     </div>
   </div>
   <div class= "row justify-content-center">
@@ -56,7 +56,9 @@
       </div>
     </div>
     <div class= "col-md-2 px-0">
-      コメント数:<span id= "comment_count"><%= @post.comments.count %>
+      <div id="comment_counter">
+        <%= render "public/comments/counter", post: @post %>
+      </div>
     </div>
     <div class="tags my-1">
       <% if @tags.present? %>
@@ -72,7 +74,7 @@
       <% end %>
     </div>
   </div>
-  <div class= "row mt-3">
-    <%= render "public/comments/comment",{ post: @post, comment: @comment } %>
+  <div id= "comment_index" class= "row mt-3">
+    <%= render "public/comments/comment", post: @post %>
   </div>
 </div>
