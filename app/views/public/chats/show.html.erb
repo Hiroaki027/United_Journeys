@@ -7,9 +7,9 @@
       <div class="message" style="width: 400px;">
         <% @chats.each do |chat| %>
           <% if chat.member_id == current_member.id %>
-            <p style="text-align: right;"><%= chat.message %></p>
+            <p style="text-align: right;"><%= chat.member.nick_name %>:&emsp;<%= chat.message %></p>
           <% else %>
-            <p style="text-align: left;"><%= chat.message %></p>
+            <p style="text-align: left;"><%= chat.member.nick_name %>:&emsp;<%= chat.message %></p>
           <% end %>
         <% end %>
       </div>
