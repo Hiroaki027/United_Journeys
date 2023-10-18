@@ -4,6 +4,7 @@ class Public::RelationshipsController < ApplicationController
   def create
     @member = Member.find(params[:member_id]) #Memberモデルからmember_idを1件検索
     current_member.follow(@member) #ログインメンバーがfollowメソッドを使う為(Memberモデル内に定義) = フォローする
+    
   end
 
   def destroy

@@ -1,0 +1,3 @@
+<% if current_member != member && current_member.following?(member) && member.following?(current_member) %>
+  <%= link_to 'チャットを始める', chat_path(member.id), remote: true, class: "btn btn-primary" %>
+<% end %>

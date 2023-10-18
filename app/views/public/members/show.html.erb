@@ -50,10 +50,8 @@
         <div class= "col-md-12 mt-1" id= "follow_btn_<%= @member.id %>">
           <%= render "public/relationships/btn", member: @member %>
         </div>
-        <div class= "col-md-12 mt-1">
-          <% if current_member != @member && current_member.following?(@member) && @member.following?(current_member) %>
-            <%= link_to 'チャットを始める', chat_path(@member.id), class: "btn btn-primary" %>
-          <% end %>
+        <div class= "col-md-12 mt-1" id= "chat_btn_<%= @member.id %>">
+          <%= render "public/chats/start" , member: @member %>
         </div>
       </div>
     </div>
