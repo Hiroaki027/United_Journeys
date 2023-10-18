@@ -9,7 +9,7 @@ class Public::ChatsController < ApplicationController
     if member_rooms.present? #member_roomsのidがnillじゃ無ければ= 既存のmember_roomsがあれば
       @room = member_rooms.room #既存のroomへ
     else
-      @room = Room.new　
+      @room = Room.new
       @room.save
       MemberRoom.create(member_id: current_member.id, room_id: @room.id) #ログインメンバーと結びつく中間テーブルを作成
       MemberRoom.create(member_id: @member.id, room_id: @room.id) #相手と結びつく中間テーブルを作成
