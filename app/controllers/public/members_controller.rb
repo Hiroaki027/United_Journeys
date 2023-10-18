@@ -6,7 +6,7 @@ class Public::MembersController < ApplicationController
     @member = Member.find(params[:id])
     @posts = Post.all
   end
-  
+
   def index
     @members = Member.all
   end
