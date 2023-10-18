@@ -4,7 +4,7 @@
       <% if @tagged_posts.present? %>
         <h4 class="headline mt-5 ml-5">Tag: <%= @tag.name %>の一覧（<%= @total_posts_count %>件）</h4>
         <div class="row mt-3">
-          <%# @tagged_posts = @tagged_posts.order(impressions_count: :desc) %>
+          <% @tagged_posts = @tagged_posts.order(crated_at: :desc) %>
           <table class= "table table-hover mt-3">
             <thead>
               <tr>
