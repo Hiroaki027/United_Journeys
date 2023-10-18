@@ -11,9 +11,12 @@
     <tr>
       <td><%= image_tag member.get_profile_image, size: '50x50' %></td>
       <td><%= link_to member.nick_name ,member_path(member.id) %></td>
-      <td>フォロー数: <%= link_to member.followings.count, member_followings_path(member) %></td>
-      <td>フォロワー数: <%= link_to member.followers.count, member_followers_path(member) %></td>
-      <td><%= render "public/relationships/btn", member: member, options: { class: "follow-link" } %></td>
+      <td id= "follow_count_<%= member.id %>">
+        <%= render "public/relationships/counter", member: member %>
+      </td>
+      <td id= "follow_btn_<%= member.id %>">
+        <%= render "public/relationships/btn", member: member, options: { class: "follow-link" } %>
+      </td>
     </tr>
     <% end %>
   </tbody>

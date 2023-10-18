@@ -44,10 +44,10 @@
         </div>
       </div>
       <div class= "row">
-        <div class= "col-md-12 border" id="follow_count">
+        <div class= "col-md-12 border" id="follow_count_<%= @member.id %>">
           <%= render "public/relationships/counter", member: @member %>
         </div>
-        <div class= "col-md-12 mt-1" id= "follow_btn">
+        <div class= "col-md-12 mt-1" id= "follow_btn_<%= @member.id %>">
           <%= render "public/relationships/btn", member: @member %>
         </div>
         <div class= "col-md-12 mt-1">

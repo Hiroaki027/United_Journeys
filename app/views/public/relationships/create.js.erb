@@ -1,2 +1,2 @@
-$("#follow_btn").html("<%= j(render 'public/relationships/btn', member: @member) %>");
-$("#follow_count").html("<%= j(render 'public/relationships/counter', member: @member) %>");
+$("#follow_btn_<%= @member.id %>").html("<%= j(render 'public/relationships/btn', member: @member ) %>");
+$("#follow_count_<%= @member.id %>").html("<%= j(render 'public/relationships/counter', member: @member) %>");
