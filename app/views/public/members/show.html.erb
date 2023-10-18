@@ -44,12 +44,11 @@
         </div>
       </div>
       <div class= "row">
-        <div class= "col-md-12 border">
-          フォロー数: <%= link_to @member.followings.count, member_followings_path(@member) %>&emsp;&emsp;
-          フォロワー数: <%= link_to @member.followers.count, member_followers_path(@member) %>
+        <div class= "col-md-12 border" id="follow_count">
+          <%= render "public/relationships/counter", member: @member %>
         </div>
-        <div class= "col-md-12 mt-1">
-          <%= render "public/relationships/btn", member: @member, options: { class: ""} %>
+        <div class= "col-md-12 mt-1" id= "follow_btn">
+          <%= render "public/relationships/btn", member: @member %>
         </div>
         <div class= "col-md-12 mt-1">
           <% if current_member != @member && current_member.following?(@member) && @member.following?(current_member) %>
