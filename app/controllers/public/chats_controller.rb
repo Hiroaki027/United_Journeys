@@ -20,7 +20,7 @@ class Public::ChatsController < ApplicationController
 
   def create
     @chat = current_member.chats.new(chat_params)
-    render :validater unless @chat.save #非同期通信化に伴い、chats/vailidater.js.erbを読み込み
+    @chat.save
   end
 
   private

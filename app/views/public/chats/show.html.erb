@@ -7,22 +7,21 @@
       <div class="message" style="width: 400px;">
         <% @chats.each do |chat| %>
           <% if chat.member_id == current_member.id %>
-            <p style="text-align: right;"><%= image_tag chat.member.get_profile_image %><%= chat.message %></p>
+            <p style="text-align: right;"><%= chat.message %></p>
           <% else %>
-            <p style="text-align: left;"><%= image_tag chat.member.get_profile_image %><%= chat.message %></p>
+            <p style="text-align: left;"><%= chat.message %></p>
           <% end %>
         <% end %>
       </div>
-      <div class="errors">
-        <%= render "public/shared/error_messages", resource: @chat %>
-      </div>
     </div>
-    <div class="col-md-2 align-self-end"> 
-      <%= form_with model: @chat, data: {remote: true} do |f| %>
-        <%= f.text_field :message %>
-        <%= f.hidden_field :room_id %>
-        <%= f.submit "送信", class: 'btn btn-success btn-block mt-2 ' %>
-      <% end %>
+    <div class= "row pt-5">
+      <div class="col-md-12 align-self-end">
+        <%= form_with model: @chat, data: {remote: true} do |f| %>
+          <%= f.text_field :message ,required: true%>
+          <%= f.hidden_field :room_id %>
+          <%= f.submit "送信", class: 'btn btn-success btn-block mt-2 ' %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
