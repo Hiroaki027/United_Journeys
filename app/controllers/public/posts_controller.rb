@@ -7,11 +7,20 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.member_id = current_member.id
-    if @post.save
-      flash[:notice] = "投稿しました"
-      redirect_to posts_path
+
+    if params[:draft].present?
+      @post.public_flag = :draft
     else
-      @member = current_member
+      @post.public_flag = :public
+    end
+
+    if @post.save
+      if @post.draft?
+        redirect_to member_path(current_member), notice: "下書きが保存されました"
+      else
+        redirect_to posts_path, notice: "投稿が公開されました"
+      end
+    else
       render :new
     end
   end
@@ -20,7 +29,7 @@ class Public::PostsController < ApplicationController
     @post = Post.new
     @posts = Post.all
     @member = current_member
-
+    @public_posts = @posts.where(public_flag: "public")
     @tags = @post.tag_counts_on(:tags)
   end
 
@@ -39,12 +48,26 @@ class Public::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if @post.update(post_params)
-      flash[:notice] = "投稿を更新しました"
-      redirect_to post_path(@post.id)
+    if params[:draft].present?
+      @post.public_flag = :draft
+      notice_message = "下書きを保存しました"
+      redirect_path = post_path(@post)
+    elsif params[:private].present?
+      @post.public_flag = :private
+      notice_message = "非公開にしました"
+      redirect_path =  post_path(@post)
+    else
+      @post.public_flag = :public
+      notice_message = "投稿を更新しました"
+      redirect_path = posts_path
+    end
+
+    if @post.save
+      redirect_to redirect_path, notice: notice_message
     else
       render :edit
     end
+
     if params[:post][:image_ids]
       params[:post][:image_ids].each do |image_id|
         image = @post.post_images.find(image_id)
@@ -66,6 +89,6 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title,:content,:language,:tag_list, post_images: [])
+    params.require(:post).permit(:title,:content,:language,:tag_list,:public_flag, post_images: [])
   end
 end

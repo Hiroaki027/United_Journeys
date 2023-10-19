@@ -36,6 +36,7 @@ post1 = Post.new(
   content: "アメリカ大好き",
   member_id: 1,
   language: "英語",
+  public_flag: "public",
 )
 post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/USA.png')), filename: 'USA.png')
 post1.save!
@@ -49,6 +50,7 @@ post2 = Post.new(
   content: "イタリア大好き",
   member_id: 2,
   language: "イタリア語",
+  public_flag: "public",
 )
 post2.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Italy.png')), filename: 'Italy.png')
 post2.save!
@@ -60,6 +62,7 @@ post3 = Post.new(
   content: "ドイツ大好き",
   member_id: 1,
   language: "ドイツ語",
+  public_flag: "public",
 )
 post3.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Germany.png')), filename: 'Germany.png')
 post3.save!
@@ -71,6 +74,7 @@ post4 = Post.new(
   content: "イギリス大好き",
   member_id: 3,
   language: "英語",
+  public_flag: "public",
 )
 post4.post_images.attach(io: File.open(Rails.root.join('app/assets/images/UK.jpg')), filename: 'UK.jpg')
 post4.save!
@@ -82,6 +86,7 @@ post5 = Post.new(
   content: "スペイン大好き",
   member_id: 4,
   language: "スペイン語",
+  public_flag: "public",
 )
 post5.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Spain.png')), filename: 'Spain.png')
 post5.save!
@@ -93,6 +98,7 @@ post6 = Post.new(
   content: "フランス大好き",
   member_id: 5,
   language: "フランス語",
+  public_flag: "public",
 )
 post6.post_images.attach(io: File.open(Rails.root.join('app/assets/images/France.png')), filename: 'France.png')
 post6.save!
@@ -104,6 +110,7 @@ post7 = Post.new(
   content: "韓国大好き",
   member_id: 6,
   language: "韓国語",
+  public_flag: "public",
 )
 post7.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Korea.png')), filename: 'Korea.png')
 post7.save!
@@ -115,6 +122,7 @@ post8 = Post.new(
   content: "ロシア大好き",
   member_id: 7,
   language: "ロシア語",
+  public_flag: "public",
 )
 post8.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Russia.png')), filename: 'Russia.png')
 post8.save!
@@ -126,6 +134,7 @@ post9 = Post.new(
   content: "オーストラリア大好き",
   member_id: 5,
   language: "英語",
+  public_flag: "public",
 )
 post9.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Australia.png')), filename: 'Australia.png')
 post9.save!
@@ -137,6 +146,7 @@ post10 = Post.new(
   content: "ブラジル大好き",
   member_id: 1,
   language: "ブラジル語",
+  public_flag: "public",
 )
 post10.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Brazil.png')), filename: 'Brazil.png')
 post10.save!

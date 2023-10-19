@@ -5,6 +5,9 @@ class Public::MembersController < ApplicationController
   def show
     @member = Member.find(params[:id])
     @posts = Post.all
+    @public_posts = @member.posts.where(public_flag: "public") #公開用 
+    @draft_posts = @member.posts.where(public_flag: "draft") #下書き用
+    @private_posts = @member.posts.where(public_flag: "private") #非公開用
   end
 
   def index

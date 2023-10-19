@@ -1,6 +1,6 @@
 <div class= "container">
   <div class= "row">
-    <div class= "col-md-3">
+    <div class= "col-md-12">
       <div class= "row mt-3">
         <h2>会員情報<i class="fa-solid fa-address-book ml-2"></i></h2>
       </div>
@@ -23,7 +23,9 @@
       </div>
       <div class= "row">
         <div class= "col-md-12 px-0">
-          <span class= "border px-5"><%= @member.nick_name %></span><span class= "border px-4">投稿数: <%= @member.posts.count %></span>
+          <span class= "border px-5"><%= @member.nick_name %></span>
+          <span class= "border px-4">投稿数: <%= @member.posts.count %></span>
+          <span class= "border px-5" id= "follow_count_<%= @member.id %>"><%= render "public/relationships/counter", member: @member %></span>
         </div>
       </div>
       <div class= "row">
@@ -32,39 +34,37 @@
         </div>
       </div>
       <div class= "row border">
-        <div class= "col-md-4 my-3 py-2">
+        <div class= "col-md-1 my-3 py-2">
           <% if current_member == @member %>
             <%= link_to new_post_path(@member.id) do %>
               <i class="fa-solid fa-circle-plus fa-2xl" style="color: #2460c2;"></i>
             <% end %>
           <% end %>
         </div>
-        <div class= "align-self-center col-md-8">
+        <div class= "align-self-center col-md-3">
           <i class="fa-regular fa-star"></i><%=link_to"お気に入りの投稿",favorites_member_path(@member) %>
         </div>
-      </div>
-      <div class= "row">
-        <div class= "col-md-12 border" id="follow_count_<%= @member.id %>">
-          <%= render "public/relationships/counter", member: @member %>
-        </div>
-        <div class= "col-md-12 mt-1" id= "follow_btn_<%= @member.id %>">
+        <div class= "col-md-3 mt-1" id= "follow_btn_<%= @member.id %>">
           <%= render "public/relationships/btn", member: @member %>
         </div>
-        <div class= "col-md-12 mt-1" id= "chat_btn_<%= @member.id %>">
+        <div class= "col-md-3 mt-1" id= "chat_btn_<%= @member.id %>">
           <%= render "public/chats/start" , member: @member %>
         </div>
       </div>
     </div>
-    <div class= "col-md-9 mt-3">
+  </div>
+  <div class= "row">
+    <div class= "col-md-12">
+    <% if current_member.id == @member.id %>
+      <%= render "public/members/flag_index",  public_posts: @public_posts , draft_posts: @draft_posts, private_posts: @private_posts %>
+    <% else %>
       <table class= "table table-hover mt-3">
         <thead>
           <tr>
             <th>タイトル</th>
             <th></th>
             <th>ユーザー名</th>
-          <% if current_page?(posts_path) %>
             <th>作成日</th>
-          <% end %>
             <th></th>
             <th></th>
             <th></th>
@@ -77,9 +77,7 @@
               <td><%= post.title %></td>
               <td><%= image_tag post.post_images[0].variant(resize: '50x50') %></td>
               <td><%= post.member.nick_name %></td>
-            <% if current_page?(posts_path) %>
               <td><%= post.created_at.strftime('%Y/%m/%d/%H:%M') %></td>
-            <% end %>
               <td><%= link_to "詳細", post_path(post.id) %></td>
               <td id= "favorite_btn_<%= post.id %>">
                 <%= render "public/favorites/favorite", post: post %>
@@ -94,6 +92,7 @@
           <% end %>
         </tbody>
       </table>
+    <% end %>
     </div>
   </div>
 </div>
