@@ -1,1 +1,43 @@
 @use '~bootstrap/scss/bootstrap';
+.toggle_switch {
+  display: table;
+}
+
+/* インプット要素を非表示に */
+.toggle_switch > input {
+  display: none;
+}
+
+/* トグルラベルのスタイル */
+.toggle_label {
+  display: block;
+  position: relative;
+  width: 3em;
+  height: 1.5em;
+  border-radius: 1.5em;
+  background-color: #ccc;
+  cursor: pointer; /* クリック可能なカーソルに */
+}
+
+/* トグルがオンのときの背景色 */
+.toggle_switch > input:checked + .toggle_label {
+  background-color: #33FFFF;
+}
+
+/* トグルボタンのデザイン */
+.toggle_label::before {
+  position: absolute;
+  top: 0.25em;
+  left: 0.25em;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: 0.3s; /* アニメーションの速さ */
+  content: ""; /* スイッチの背景 */
+}
+
+/* トグルがオンのときのボタン位置 */
+.toggle_switch > input:checked + .toggle_label::before {
+  left: calc(100% - 1.25em);
+}

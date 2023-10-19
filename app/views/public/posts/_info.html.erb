@@ -9,14 +9,14 @@
       <label for="Post_images">画像</label><br>
       <%= f.file_field :post_images, multiple: true, id:"Post_images" %><br />
     </div>
-    <div class= "col-md-12 mb-3"> 
+    <div class= "col-md-12 mb-3">
       <% if post.post_images.attached? %>
         <p>選択済みの画像（削除する画像にチェックをつけてください）</p>
         <div style="display: flex; flex-wrap: wrap; width: 750px;">
         <% post.post_images.each do |image| %>
           <div style="display: flex; margin:5px 5px 5px 0;">
             <%= f.check_box :image_ids, { multiple: true }, image.id, false %>
-            <label for="post_image_ids_<%= image.id %>" > 
+            <label for="post_image_ids_<%= image.id %>" >
               <%= image_tag image, size: '300x200' %>
             </label>
           </div>
@@ -36,8 +36,51 @@
       <%= f.label :tag_list, "Tag", class: "form-label" %>
       <%= f.text_field :tag_list, value: post.tag_list.join(","), class: "form-control", data: { role: "tagsinput" } %>
     </div>
-    <div class="col-md-3">
-      <%= f.submit class: 'btn btn-success btn-block mt-2' %>
+    <div class="toggle_switch mx-3">
+      <input type="checkbox" id="postTypeToggle" class="toggle_input">
+      <label for="postTypeToggle" class="toggle_label"></label>
+    </div>
+    <div class="btn-group" role="group" id="buttonGroup">
+      <% if post.persisted? %> <!--DBに既存の投稿がある場合-->
+        <% if post.draft? %> <!--下書きの投稿かどうか-->
+          <%= f.submit '下書き保存', id: 'draftButton', name: 'draft', class: "draft-btn" %>
+          <%= f.submit '公開する', id: 'publicButton', name: 'public', class: "submit-btn" %>
+        <% elsif post.private? %> <!--非公開かどうか-->
+          <%= f.submit '更新する', id: 'updateButton', name: 'private', class: "draft-btn" %>
+          <%= f.submit '公開する', id: 'publicButton', name: 'public', class: "submit-btn" %>
+        <% else %>
+          <%= f.submit '非公開にする', id: 'privateButton', name: 'private', class: "private-btn" %>
+          <%= f.submit '公開する', id: 'publicButton', name: 'public', class: "submit-btn" %>
+        <% end %>
+      <% else %>
+          <%= f.submit '下書き保存', id: 'draftButton', name: 'draft', class: "draft-btn" %>
+          <%= f.submit '公開する', id: 'postButton', name: 'public', class: "submit-btn" %>
+      <% end %>
     </div>
   </div>
+  <script>
+    $(document).ready(function() {
+      // ボタンの要素を生成
+      var draftButton = $('<%= f.submit "下書き保存", id: "draftButton", name: "draft", class: "draft-btn btn-info" %>');
+      var postButton = $('<%= f.submit "公開する", id: "postButton", name: "post", class: "submit-btn btn-primary" %>');
+
+      // トグルスイッチの変更イベント
+      $('#postTypeToggle').change(function() {
+        var isChecked = $(this).is(':checked');
+        var buttonGroup = $('#buttonGroup');
+
+        buttonGroup.empty(); // 既存のボタンを削除
+
+        // トグルがオンかオフかによって適切なボタンを切り替え
+        if (isChecked) {
+          buttonGroup.append(postButton); // on
+        } else {
+          buttonGroup.append(draftButton); // off
+        }
+      });
+
+      // 初期設定：トグルの状態に応じたボタンを表示
+      $('#postTypeToggle').change();
+    });
+  </script>
 <% end %>
