@@ -56,7 +56,7 @@ class Public::PostsController < ApplicationController
     elsif params[:private].present?
       @post.public_flag = :private
       notice_message = "非公開にしました"
-      redirect_path =  post_path(@post)
+      redirect_path = member_path(current_member)
     else
       @post.public_flag = :public
       notice_message = "投稿を更新しました"
@@ -81,7 +81,7 @@ class Public::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to posts_path, notice: "投稿を削除しました"
+    redirect_to member_path(current_member), notice: "投稿を削除しました"
   end
 
   def search
