@@ -21,9 +21,9 @@ class Public::MembersController < ApplicationController
   def update
     @member = current_member
     if @member.update(member_params)
-      flash[:notice] = "会員情報を変更しました。"
-      redirect_to member_path(current_member)
+      redirect_to member_path(current_member), notice: "会員情報を変更しました。"
     else
+      flash.now[:alert] = "会員情報の変更に失敗しました"
       render :edit
     end
   end
@@ -32,8 +32,7 @@ class Public::MembersController < ApplicationController
     @member = current_member
     @member.update(is_deleted: true)
     reset_session
-    flash[:notice] = "退会処理を完了しました。ご利用ありがとうございました。"
-    redirect_to root_path
+    redirect_to root_path, notice: "退会処理を完了しました。ご利用ありがとうございました。"
   end
 
   def favorites

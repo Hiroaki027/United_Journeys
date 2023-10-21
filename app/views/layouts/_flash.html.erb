@@ -1,0 +1,5 @@
+<% if flash[:notice] %>
+  <p class="alert alert-success col-2"><%= notice %></p>
+<% else flash[:alert] %>
+  <p class="alert alert-alert col-2"><%= alert %></p>
+<% end %>
