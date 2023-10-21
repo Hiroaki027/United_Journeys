@@ -18,6 +18,10 @@ class Post < ApplicationRecord
   def private?
     public_flag == "private"
   end
+  
+  def get_post_images
+    (post_images.attached?) ? post_images : "no_image.jpg"
+  end
 
   def favorited_by?(member) #特定のmemberがいいね(favorite)しているか
     favorites.exists?(member_id: member.id) #recordにmember_idと引数として渡されているmember.idが合致のものが存在しているか

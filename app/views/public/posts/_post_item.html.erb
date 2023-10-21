@@ -15,7 +15,11 @@
     <% posts.each  do |post| %>
       <tr>
         <td><%= post.title %></td>
+      <% if post.post_images.attached? %>
         <td><%= image_tag post.post_images[0].variant(resize: '50x50') %></td>
+      <% else %>
+        <td><%= image_tag post.get_post_images ,size: "50x50" %></td>
+      <% end %>
         <td>
           <%= link_to member_path(post.member.id) do %>
             <%= post.member.nick_name %>

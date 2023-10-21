@@ -43,10 +43,10 @@
     <div class="btn-group" role="group" id="buttonGroup">
       <% if post.persisted? %> <!--DBに既存の投稿がある場合-->
         <% if post.draft? %> <!--下書きの投稿かどうか-->
-          <%= f.submit '下書き保存', id: 'draftButton', name: 'draft', class: "draft-btn" %>
+          <%= f.submit '更新する', id: 'updateButton', name: 'draft', class: "draft-btn" %>
           <%= f.submit '公開する', id: 'publicButton', name: 'public', class: "submit-btn" %>
         <% elsif post.private? %> <!--非公開かどうか-->
-          <%= f.submit '更新する', id: 'updateButton', name: 'private', class: "draft-btn" %>
+          <%= f.submit '下書き保存', id: 'draftButton', name: 'draft', class: "draft-btn" %>
           <%= f.submit '公開する', id: 'publicButton', name: 'public', class: "submit-btn" %>
         <% else %>
           <%= f.submit '非公開にする', id: 'privateButton', name: 'private', class: "private-btn" %>
@@ -54,15 +54,20 @@
         <% end %>
       <% else %>
           <%= f.submit '下書き保存', id: 'draftButton', name: 'draft', class: "draft-btn" %>
-          <%= f.submit '公開する', id: 'postButton', name: 'public', class: "submit-btn" %>
+          <%= f.submit '公開する', id: 'publicButton', name: 'public', class: "submit-btn" %>
       <% end %>
     </div>
   </div>
   <script>
     $(document).ready(function() {
+      const status = '<%= post.public_flag %>'
+      const isNewRecord = '<%= post.new_record? %>' //new_record?既存レコードがないか判別persisted?と逆
+
       // ボタンの要素を生成
       var draftButton = $('<%= f.submit "下書き保存", id: "draftButton", name: "draft", class: "draft-btn btn-info" %>');
-      var postButton = $('<%= f.submit "公開する", id: "postButton", name: "post", class: "submit-btn btn-primary" %>');
+      var publicButton = $('<%= f.submit "公開する", id: "publicButton", name: "public", class: "submit-btn btn-primary" %>');
+      var updateButton = $('<%= f.submit "更新する", id: "updateButton", name: "draft", class: "submit-btn btn-success" %>');
+      var privateButton = $('<%= f.submit "非公開にする", id: "privateButton", name: "private", class: "submit-btn btn-danger" %>');
 
       // トグルスイッチの変更イベント
       $('#postTypeToggle').change(function() {
@@ -72,10 +77,34 @@
         buttonGroup.empty(); // 既存のボタンを削除
 
         // トグルがオンかオフかによって適切なボタンを切り替え
-        if (isChecked) {
-          buttonGroup.append(postButton); // on
+        if (isNewRecord === "true") {
+          if (isChecked) {
+            buttonGroup.append(publicButton); // on
+          } else {
+            buttonGroup.append(draftButton); // off
+          }
         } else {
-          buttonGroup.append(draftButton); // off
+          if (status === "public") {
+            if (isChecked) {
+              buttonGroup.append(privateButton); // on
+            } else {
+              buttonGroup.append(publicButton); // off
+            }
+          }
+          if (status === "draft") {
+            if (isChecked) {
+              buttonGroup.append(publicButton); // on
+            } else {
+              buttonGroup.append(updateButton); // off
+            }
+          }
+          if (status === "private") {
+            if (isChecked) {
+              buttonGroup.append(publicButton); // on
+            } else {
+              buttonGroup.append(privateButton); // off
+            }
+          }
         }
       });
 
