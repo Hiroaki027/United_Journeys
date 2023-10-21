@@ -21,6 +21,7 @@ class Public::PostsController < ApplicationController
         redirect_to posts_path, notice: "投稿が公開されました"
       end
     else
+      flash.now[:alert] =　"投稿の作成に失敗しました"
       render :new
     end
   end
@@ -65,6 +66,7 @@ class Public::PostsController < ApplicationController
     if @post.save
       redirect_to redirect_path, notice: notice_message
     else
+      flash.now[:alert] = "投稿の更新に失敗しました"
       render :edit
     end
 
@@ -79,7 +81,7 @@ class Public::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to posts_path
+    redirect_to posts_path, notice: "投稿を削除しました"
   end
 
   def search
