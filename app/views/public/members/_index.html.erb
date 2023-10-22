@@ -1,4 +1,4 @@
-<table class="table mt-3">
+<table class="table table-hover mt-3">
   <thead>
     <tr>
       <th></th>
@@ -8,7 +8,7 @@
   </thead>
   <tbody>
     <% members.each do |member| %>
-    <tr>
+    <tr data-href= "<%= member_path(member.id) %>">
       <td><%= image_tag member.get_profile_image, size: '50x50' %></td>
       <td><%= link_to member.nick_name ,member_path(member.id) %></td>
       <td id= "follow_count_<%= member.id %>">
@@ -17,7 +17,17 @@
       <td id= "follow_btn_<%= member.id %>">
         <%= render "public/relationships/btn", member: member, options: { class: "follow-link" } %>
       </td>
+      <td id= "chat_btn_<%= member.id %>">
+        <%= render "public/chats/start" , member: member %>
+      </td>
     </tr>
     <% end %>
   </tbody>
 </table>
+<script>
+  $(function(){
+  $('tr[data-href]').on('click', function(){
+    location.href = $(this).data('href');
+    });
+  });
+</script>

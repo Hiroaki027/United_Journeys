@@ -67,18 +67,16 @@
             <th>作成日</th>
             <th></th>
             <th></th>
-            <th></th>
             <th>タグ名</th>
           </tr>
         </thead>
         <tbody>
           <% @member.posts.each  do |post| %>
-            <tr>
+            <tr data-href= "<%= post_path(post.id) %>">
               <td><%= post.title %></td>
               <td><%= image_tag post.post_images[0].variant(resize: '50x50') %></td>
               <td><%= post.member.nick_name %></td>
               <td><%= post.created_at.strftime('%Y/%m/%d/%H:%M') %></td>
-              <td><%= link_to "詳細", post_path(post.id) %></td>
               <td id= "favorite_btn_<%= post.id %>">
                 <%= render "public/favorites/favorite", post: post %>
               </td>
@@ -96,3 +94,10 @@
     </div>
   </div>
 </div>
+<script>
+  $(function(){
+  $('tr[data-href]').on('click', function(){
+    location.href = $(this).data('href');
+    });
+  });
+</script>
