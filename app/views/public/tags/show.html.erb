@@ -14,18 +14,20 @@
                 <th>作成日</th>
                 <th></th>
                 <th></th>
-                <th></th>
                 <th>タグ名</th>
               </tr>
             </thead>
             <tbody>
               <% @tagged_posts.each  do |post| %>
-                <tr>
+                <tr data-href= "<%= post_path(post.id) %>">
                   <td><%= post.title %></td>
+                <% if post.post_images.attached? %>
                   <td><%= image_tag post.post_images[0].variant(resize: '50x50') %></td>
+                <% else %>
+                  <td><%= image_tag post.get_post_images ,size: "50x50" %></td>
+                <% end %>
                   <td><%= post.member.nick_name %></td>
                   <td><%= post.created_at.strftime('%Y/%m/%d/%H:%M') %></td>
-                  <td><%= link_to "詳細", post_path(post.id) %></td>
                   <td id= "favorite_buttons_<%= post.id %>">
                     <%= render "public/favorites/favorite", post: post %>
                   </td>
@@ -46,3 +48,10 @@
     </div>
   </div>
 </div>
+<script>
+  $(function(){
+  $('tr[data-href]').on('dblclick', function(){
+    location.href = $(this).data('href');
+    });
+  });
+</script>
