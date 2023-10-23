@@ -62,7 +62,7 @@ post3 = Post.new(
   content: "ドイツ大好き",
   member_id: 1,
   language: "ドイツ語",
-  public_flag: "public",
+  public_flag: "draft",
 )
 post3.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Germany.png')), filename: 'Germany.png')
 post3.save!
@@ -146,7 +146,7 @@ post10 = Post.new(
   content: "ブラジル大好き",
   member_id: 1,
   language: "ブラジル語",
-  public_flag: "public",
+  public_flag: "private",
 )
 post10.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Brazil.png')), filename: 'Brazil.png')
 post10.save!

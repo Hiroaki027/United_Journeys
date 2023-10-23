@@ -6,15 +6,29 @@
         <tr>
           <th>会員画像</th>
           <th>ユーザー名</th>
+          <th>退会ステータス</th>
         </tr>
         <% @members.each do |member| %>
-          <tr>
-            <td><%= image_tag member.get_profile_image %></td>
+          <tr data-href= "<%= admin_member_path(member) %>">
+            <td><%= image_tag member.get_profile_image ,size: "50x50"%></td>
             <td><%= member.nick_name %></td>
-            <td><%= link_to "会員詳細",admin_member_path(member) %></td>
+            <td>
+              <% if member.is_deleted == false %>
+                <strong class="text-success">有効</strong>
+              <% else %>
+                <strong class="text-muted">退会</strong>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </table>
     </div>
   </div>
 </div>
+<script>
+  $(function(){
+  $('tr[data-href]').on('dblclick', function(){
+    location.href = $(this).data('href');
+    });
+  });
+</script>
