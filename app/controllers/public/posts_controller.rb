@@ -63,7 +63,7 @@ class Public::PostsController < ApplicationController
       redirect_path = posts_path
     end
 
-    if @post.save
+    if @post.update(post_params)
       redirect_to redirect_path, notice: notice_message
     else
       flash.now[:alert] = "投稿の更新に失敗しました"

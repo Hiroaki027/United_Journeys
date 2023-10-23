@@ -9,7 +9,7 @@
           <span class= "border"><%= image_tag @member.get_profile_image %></span>
           <div class= "d-flex align-items-start flex-column">
             <% unless @member.guest_member? %>
-              <% if current_member == @member.id %>
+              <% if current_member.id == @member.id %>
                 <div class= "mb-auto p-2">
                   <%= link_to  edit_member_path(@member.id), class: 'btn btn-outline-secondary btn-block' do%>
                     <i class="fa-solid fa-user-cog"></i>
