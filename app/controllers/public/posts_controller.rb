@@ -86,6 +86,7 @@ class Public::PostsController < ApplicationController
 
   def search
     @posts = Post.looks(params[:search],params[:word])
+    @public_posts = @posts.where(public_flag: "public")
   end
 
   private
