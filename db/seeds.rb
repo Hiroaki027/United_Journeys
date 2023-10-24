@@ -62,7 +62,7 @@ def create_posts(member,count,public_flag_options, tags,titles,languages)
   initial_date = Time.now - (count - 1).days
   random_titles = titles.sample
   random_languages = languages.sample
-  
+
   count.times do |i|
     title = random_titles
     content = "サンプルの投稿#{i+1}です。"
@@ -91,7 +91,7 @@ def create_posts(member,count,public_flag_options, tags,titles,languages)
 end
 
 Member.where.not(nick_name: 'ゲスト会員').each do |member|
-  public_flags = [0] * 12 + [1] * 3 + [2] * 3
+  public_flags = [0] * 7 + [1] * 3 + [2] * 3
   create_posts(member,7, public_flags,tags,titles,languages)
 end
 
