@@ -5,6 +5,7 @@
       <th></th>
       <th>ユーザー名</th>
       <th>作成日</th>
+      <th>対象言語</th>
       <th></th>
       <th></th>
       <th>タグ名</th>
@@ -26,6 +27,7 @@
             <% end %>
           </td>
           <td><%= post.created_at.strftime('%Y/%m/%d/%H:%M') %></td>
+          <td><%= post.language %></td>
           <td id= "favorite_btn_<%= post.id %>">
             <%= render "public/favorites/favorite", post: post %>
           </td>

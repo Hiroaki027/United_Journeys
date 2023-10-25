@@ -5,158 +5,140 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Admin.create!(
-  email: 'admin@admin',
-  password: 'admin1'
-  ) #admin用
 
-# タグの作成
-tags = %w(アメリカ 韓国 イギリス オーストラリア スペイン カナダ ドイツ)
-tags.each { |tag_name| ActsAsTaggableOn::Tag.find_or_create_by(name: tag_name) }
-tag_list = tags.sample(2)
-
-# 一括で10個のユーザーデータを作成
-# 10回繰り返し処理を行う
-
-7.times do |n|
-  Member.create!(
-    # n + 1で数字が重複しないようにする
-    last_name: "テスト",
-    first_name: "会員#{n + 1}",
-    nick_name: "ゲスト#{n + 1}",
-    residence: "Univers",
-    introduction: "Hello,World",
-    password: "password",
-    email: "test#{n + 1}@test.com",
-    )
+#admin用
+Admin.find_or_create_by!(email: ENV['ADMIN_EMAIL']) do |admin|
+  admin.password = ENV['ADMIN_PASSWORD']
 end
 
-post1 = Post.new(
-  title: "USA",
-  content: "アメリカ大好き",
-  member_id: 1,
-  language: "英語",
-  public_flag: "public",
-)
-post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/USA.png')), filename: 'USA.png')
-post1.save!
-post1.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Italy.png')), filename: 'Italy.png')
-post1.save!
-post1.tag_list.add(tag_list)
-post1.save!
+nick_names = ['ヒロ016','イチゴ015','ゼロツー002','ゴロー056','ゾロメ666','ミツル326','フトシ214','ミク390','ココロ556','イクノ196','ナオミ703']
+last_names = ['ツナシ','アゲマキ','シンドウ','ニチ','シナダ','ワタナベ','ミヤビ','ダイ','カタシロ','シモーヌ','タクミ']
+first_names = ['タクト','ワコ','スガタ','ケイト','ベニオ','カナコ','レイジ','タカシ','リョウスケ','アラゴン','タケオ']
+residences = ['日本','アメリカ','イギリス','韓国','オーストラリア','スペイン','イタリア','カナダ','ドイツ','フランス','ブラジル']
+numbers = [1,2,3,4,5,6,7,8,9,10,11]
 
-post2 = Post.new(
-  title: "Italy",
-  content: "イタリア大好き",
-  member_id: 2,
-  language: "イタリア語",
-  public_flag: "public",
-)
-post2.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Italy.png')), filename: 'Italy.png')
-post2.save!
-post2.tag_list.add(tag_list)
-post2.save!
+def find_or_create_member(last_name, first_name, nick_name, residence, number)
+  introduction = "Hello,World!#{nick_name}です。よろしくお願いします。"
+  email = "#{number}@example.com"
+  password = "password"
+  is_deleted = false
 
-post3 = Post.new(
-  title: "Germany",
-  content: "ドイツ大好き",
-  member_id: 1,
-  language: "ドイツ語",
-  public_flag: "draft",
-)
-post3.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Germany.png')), filename: 'Germany.png')
-post3.save!
-post3.tag_list.add(tag_list)
-post3.save!
+  # ランダムな日付を生成
+  min_days_ago = 1
+  max_days_ago = 365
+  random_days_ago = rand(min_days_ago..max_days_ago)
+  random_date = Time.now - random_days_ago.days
 
-post4 = Post.new(
-  title: "UK",
-  content: "イギリス大好き",
-  member_id: 3,
-  language: "英語",
-  public_flag: "public",
-)
-post4.post_images.attach(io: File.open(Rails.root.join('app/assets/images/UK.jpg')), filename: 'UK.jpg')
-post4.save!
-post4.tag_list.add(tag_list)
-post4.save!
+  member = Member.find_or_create_by!(email: email) do |m|
+    m.last_name = last_name
+    m.first_name = first_name
+    m.nick_name = nick_name
+    m.residence = residence
+    m.introduction = introduction
+    m.password = password
+    m.is_deleted = is_deleted
+    m.created_at = random_date
+    m.updated_at = random_date
+  end
+  if member.persisted?
+    puts "member created successfully: #{member.nick_name}"
+  else
+    puts "Error creating member:"
+    puts member.errors.full_messages
+  end
+end
 
-post5 = Post.new(
-  title: "Spain",
-  content: "スペイン大好き",
-  member_id: 4,
-  language: "スペイン語",
-  public_flag: "public",
-)
-post5.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Spain.png')), filename: 'Spain.png')
-post5.save!
-post5.tag_list.add(tag_list)
-post5.save!
+last_names.zip(first_names,nick_names,residences,numbers) do |last_name,first_name,nick_name,residence,number|
+  find_or_create_member(last_name, first_name, nick_name, residence,number)
+end
 
-post6 = Post.new(
-  title: "France",
-  content: "フランス大好き",
-  member_id: 5,
-  language: "フランス語",
-  public_flag: "public",
-)
-post6.post_images.attach(io: File.open(Rails.root.join('app/assets/images/France.png')), filename: 'France.png')
-post6.save!
-post6.tag_list.add(tag_list)
-post6.save!
+tags = %w(アメリカ 韓国 イギリス オーストラリア スペイン カナダ ドイツ)
+tags.each { |tag_name| ActsAsTaggableOn::Tag.find_or_create_by(name: tag_name) }
+titles = ['USA','Italy','Germany',"Korea",'Japan','UK','Australia','Brazil','Spain','China','France']
+languages = ['日本語','英語','ドイツ語','スペイン語','イタリア語','フランス語','韓国語','中国語','ポルトガル語']
 
-post7 = Post.new(
-  title: "Korea",
-  content: "韓国大好き",
-  member_id: 6,
-  language: "韓国語",
-  public_flag: "public",
-)
-post7.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Korea.png')), filename: 'Korea.png')
-post7.save!
-post7.tag_list.add(tag_list)
-post7.save!
+def create_posts(member,count,public_flag_options, tags,titles,languages)
+  initial_date = Time.now - (count - 1).days
+  random_titles = titles.sample
+  random_languages = languages.sample
 
-post8 = Post.new(
-  title: "Russia",
-  content: "ロシア大好き",
-  member_id: 7,
-  language: "ロシア語",
-  public_flag: "public",
-)
-post8.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Russia.png')), filename: 'Russia.png')
-post8.save!
-post8.tag_list.add(tag_list)
-post8.save!
+  count.times do |i|
+    title = random_titles
+    content = "サンプルの投稿#{i+1}です。"
+    language = random_languages
+    public_flag = public_flag_options.sample
+    tag_list = tags.sample(2)
 
-post9 = Post.new(
-  title: "Australia",
-  content: "オーストラリア大好き",
-  member_id: 5,
-  language: "英語",
-  public_flag: "public",
-)
-post9.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Australia.png')), filename: 'Australia.png')
-post9.save!
-post9.tag_list.add(tag_list)
-post9.save!
+    post_date = initial_date + i.days
 
-post10 = Post.new(
-  title: "Brazil",
-  content: "ブラジル大好き",
-  member_id: 1,
-  language: "ブラジル語",
-  public_flag: "private",
-)
-post10.post_images.attach(io: File.open(Rails.root.join('app/assets/images/Brazil.png')), filename: 'Brazil.png')
-post10.save!
-post10.tag_list.add(tag_list)
-post10.save!
+    post_params = {
+      member_id: member.id,
+      title: title,
+      content: content,
+      language: language
+    }
 
-7.times do |n|
-  Comment.create!(
-    member_id: n+1,
-    post_id: n+1,
-    comment: "コメント"
-  )
+  post = Post.find_or_create_by!(post_params) do |p|
+      p.public_flag = public_flag
+      p.created_at = post_date
+      p.updated_at = post_date
+      p.tag_list.add(tag_list)
+    end
+
+    puts "Creating post with title: #{title},member_nick_name: #{member.nick_name}, tag_list: #{tag_list}"
+  end
+end
+
+Member.where.not(nick_name: 'ゲスト会員').each do |member|
+  public_flags = [0] * 7 + [1] * 3 + [2] * 3
+  create_posts(member,7, public_flags,tags,titles,languages)
+end
+
+members = Member.all
+posts = Post.where(public_flag: "public")
+
+
+members.each do |member|
+  favorite_posts = posts.sample(rand(1..3))
+  favorite_posts.each do |post|
+    Favorite.find_or_create_by!(
+      member_id: member.id,
+      post_id: post.id
+      )
+  end
+end
+
+member_comments = [
+  'すごく楽しそう！！',
+  '興味深い情報です。',
+  '大変参考になりました',
+  'めちゃくちゃいいですね！',
+  '面白くて笑っちゃいました！',
+  '現地でのおすすめは何ですか？',
+  'フォローしました！'
+  ]
+
+members.each do |member|
+  posts.each do |post|
+    num_comments = rand(0..1)
+    next if num_comments.zero?
+
+    comment_text = member_comments.sample
+    comment = Comment.find_or_create_by!(
+      member_id: member.id,
+      post_id: post.id
+    ) do |c|
+      c.comment = comment_text
+      end
+  end
+end
+
+members.each do |member|
+  following_members = members - [member]
+  following_members.shuffle.take(rand(1..4)).each do |following_member|
+    Relationship.find_or_create_by!(
+      follower_id: member.id,
+      followed_id: following_member.id
+      )
+  end
 end

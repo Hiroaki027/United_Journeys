@@ -1,8 +1,8 @@
 <div class= "container">
   <div class= "row">
     <div class= "col-md-12">
-      <h2 class="font-weight-bold">&nbsp;<%= params[:word] %>の検索一覧&nbsp;(全<%= @posts.count %>件)</h2>
-      <%= render "post_item", posts: @posts %>
+      <h2 class="font-weight-bold">&nbsp;<%= params[:word] %>の検索一覧&nbsp;(全<%= @public_posts.count %>件)</h2>
+      <%= render "post_item", posts: @public_posts %>
     </div>
   </div>
 </div>
