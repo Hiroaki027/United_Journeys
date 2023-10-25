@@ -7,8 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 #admin用
-Admin.find_or_create_by!(email: ENV['ADMIN_EMAIL']) do |admin|
-  admin.password = ENV['ADMIN_PASSWORD']
+Admin.find_or_create_by!(email: 'admin@admin') do |admin|
+  admin.password = 'admin1'
 end
 
 nick_names = ['ヒロ016','イチゴ015','ゼロツー002','ゴロー056','ゾロメ666','ミツル326','フトシ214','ミク390','ココロ556','イクノ196','ナオミ703']
@@ -40,6 +40,7 @@ def find_or_create_member(last_name, first_name, nick_name, residence, number)
     m.created_at = random_date
     m.updated_at = random_date
   end
+
   if member.persisted?
     puts "member created successfully: #{member.nick_name}"
   else
