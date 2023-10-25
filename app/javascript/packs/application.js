@@ -11,8 +11,9 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
-import "../stylesheets/application"; 
+import "../stylesheets/application";
 import 'bootstrap-tagsinput';
+import "../packs/slick.js";
 
 $(document).ready(function() {
   $("input[data-role='tagsinput']").tagsinput();
