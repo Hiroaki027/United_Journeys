@@ -54,7 +54,6 @@ end
 
 tags = %w(アメリカ 韓国 イギリス オーストラリア スペイン カナダ ドイツ)
 tags.each { |tag_name| ActsAsTaggableOn::Tag.find_or_create_by(name: tag_name) }
-tag_list = tags.sample(2)
 titles = ['USA','Italy','Germany',"Korea",'Japan','UK','Australia','Brazil','Spain','China','France']
 languages = ['日本語','英語','ドイツ語','スペイン語','イタリア語','フランス語','韓国語','中国語','ポルトガル語']
 
@@ -79,7 +78,7 @@ def create_posts(member,count,public_flag_options, tags,titles,languages)
       language: language
     }
 
-    post = Post.find_or_create_by!(post_params) do |p|
+  post = Post.find_or_create_by!(post_params) do |p|
       p.public_flag = public_flag
       p.created_at = post_date
       p.updated_at = post_date
@@ -95,10 +94,51 @@ Member.where.not(nick_name: 'ゲスト会員').each do |member|
   create_posts(member,7, public_flags,tags,titles,languages)
 end
 
-7.times do |n|
-  Comment.create!(
-    member_id: n+1,
-    post_id: n+1,
-    comment: "コメント"
-  )
+members = Member.all
+posts = Post.where(public_flag: "public")
+
+
+members.each do |member|
+  favorite_posts = posts.sample(rand(1..3))
+  favorite_posts.each do |post|
+    Favorite.find_or_create_by!(
+      member_id: member.id,
+      post_id: post.id
+      )
+  end
+end
+
+member_comments = [
+  'すごく楽しそう！！',
+  '興味深い情報です。',
+  '大変参考になりました',
+  'めちゃくちゃいいですね！',
+  '面白くて笑っちゃいました！',
+  '現地でのおすすめは何ですか？',
+  'フォローしました！'
+  ]
+
+members.each do |member|
+  posts.each do |post|
+    num_comments = rand(0..1)
+    next if num_comments.zero?
+
+    comment_text = member_comments.sample
+    comment = Comment.find_or_create_by!(
+      member_id: member.id,
+      post_id: post.id
+    ) do |c|
+      c.comment = comment_text
+      end
+  end
+end
+
+members.each do |member|
+  following_members = members - [member]
+  following_members.shuffle.take(rand(1..4)).each do |following_member|
+    Relationship.find_or_create_by!(
+      follower_id: member.id,
+      followed_id: following_member.id
+      )
+  end
 end
