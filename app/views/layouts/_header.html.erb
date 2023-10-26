@@ -1,6 +1,6 @@
 <header style= "background-color: #00bfff">
   <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
+    <div class="container">
     <% if member_signed_in? %>
       <a class="navbar-brand" href="/" , data-turbolinks='false'>
         <span>United<i class="fa-solid fa-plane-up" style="color: #ffffff;"></i>Journeys</span>
@@ -42,11 +42,11 @@
             <% end %>
           </li>
         <% else %>
-          <li>
-            <%= link_to root_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> About
-            <% end %>
-          </li>
+          <!--<li>-->
+          <!--  <%#= link_to root_path,class: 'nav-link text-light' do %>-->
+          <!--    <i class="fas fa-home"></i> About-->
+          <!--  <%# end %>-->
+          <!--</li>-->
           <li>
             <%= link_to new_member_registration_path,class: 'nav-link text-light' do %>
               <i class="fas fa-link"></i> 新規登録
