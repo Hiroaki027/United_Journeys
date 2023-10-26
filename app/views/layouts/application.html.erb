@@ -19,7 +19,9 @@
   <body class= "d-flex flex-column vh-100">
     <%= render 'layouts/header' %>
     <main>
+    <% if !@hide_flash %>
       <%= render "layouts/flash" %>
+    <% end %>
       <%= yield %>
     </main>
     <%= render 'layouts/footer' %>
