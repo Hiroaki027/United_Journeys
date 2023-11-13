@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_14_015014) do
+ActiveRecord::Schema.define(version: 2023_11_13_080814) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -73,6 +73,23 @@ ActiveRecord::Schema.define(version: 2023_10_14_015014) do
     t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "group_members", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "member_id"
+    t.integer "group_id"
+    t.index ["group_id"], name: "index_group_members_on_group_id"
+    t.index ["member_id"], name: "index_group_members_on_member_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.text "introduction"
+    t.integer "owner_id"
   end
 
   create_table "member_rooms", force: :cascade do |t|
@@ -153,5 +170,7 @@ ActiveRecord::Schema.define(version: 2023_10_14_015014) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "group_members", "groups"
+  add_foreign_key "group_members", "members"
   add_foreign_key "taggings", "tags"
 end
