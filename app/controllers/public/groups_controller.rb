@@ -1,5 +1,5 @@
 class Public::GroupsController < ApplicationController
-  before_action :autenticate_member!, except: [:top, :admin]
+  before_action :authenticate_member!, except: [:top, :admin]
   before_action :ensure_correct_member, only: [:edit, :update]
   
   def index
