@@ -5,11 +5,13 @@ class Public::GroupsController < ApplicationController
   def index
     @post = Post.new
     @groups = Group.all
+    @member = Member.find(current_member.id)
   end
   
   def show
     @post = Post.new
     @group = Group.find(params[:id])
+    @member = Member.find(params[:id])
   end
   
   def join
@@ -33,11 +35,10 @@ class Public::GroupsController < ApplicationController
   end
   
   def edit
-    
   end
   
   def update
-    if @groups.update(group_params)
+    if @group.update(group_params)
       redirect_to groups_path
     else
       render "edit"
@@ -53,7 +54,7 @@ class Public::GroupsController < ApplicationController
   private
   
   def group_params
-    params.require(:group).permit(:name, :introduction)
+    params.require(:group).permit(:name, :introduction, :group_image)
   end
   
   def ensure_correct_member
