@@ -36,6 +36,9 @@ Rails.application.routes.draw do
       end
     end
     resources :tags, only: [:show]
+    resources :groups do
+      get "join" => "groups#join"
+    end
   end
 
   namespace :admin do

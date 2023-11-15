@@ -18,6 +18,7 @@ class Member < ApplicationRecord
   has_many :member_rooms
   has_many :chats
   has_many :rooms, through: :member_rooms #member_rooms(中間テーブル)を経由してroomへ
+  has_many :group_members
 
   validates :last_name, presence: true, length: { minimum: 1, maximum: 20 }
   validates :first_name, presence: true, length: { minimum: 1, maximum: 20 }
