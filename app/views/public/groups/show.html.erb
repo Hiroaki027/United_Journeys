@@ -1,7 +1,7 @@
 <div class= "container">
   <div class= "row">
     <div class='col-md-8 offset-md-1'>
-      <h2>Group Detail</h2>
+      <h2>グループ詳細</h2>
       <table class='table table-hover table-inverse'>
         <thead>
           <tr>
@@ -25,17 +25,19 @@
             <td><%= @group.name %></td>
             <td><%= @group.introduction %></td>
             <td>
-              <% @group.member.each do |member| %>
-                <%= member.nick_name %><br>
+              <% @group.members.each do |member| %>
+                <% unless member == current_member %>
+                  <%= link_to member.nick_name, member_path(member) %><br>
+                <% end %>
               <% end %>
             </td>
             <td>
               <% if @group.owner_id == current_member.id %>
-                <%= link_to 'Edit', edit_group_path(@group), class: "btn btn-sm btn-success" %>
+                <%= link_to 'グループ編集', edit_group_path(@group), class: "btn btn-sm btn-success" %>
               <% elsif @group.members.include?(current_member) %>
-                <%= link_to 'Leave this group', group_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
+                <%= link_to 'グループ退会', group_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
               <% else %>
-                <%= link_to 'Join this group', group_join_path(@group), class: "btn btn-sm btn-success" %>
+                <%= link_to 'グループに参加', group_join_path(@group), class: "btn btn-sm btn-success" %>
               <% end %>
             </td>
           </tr>
