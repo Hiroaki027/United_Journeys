@@ -48,18 +48,18 @@
           </li>
         <% else %>
           <li>
-            <%= link_to root_path,class: 'nav-link text-light' do %>
-              <i class="fa-solid fa-circle-info"></i> 使い方
+            <%= link_to about_path,class: 'nav-link text-light' do %>
+              <i class="fa-solid fa-circle-info"></i> サイトについて
             <% end %>
           </li>
           <li>
             <%= link_to new_member_registration_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-link"></i> 新規登録
+              <i class="fas fa-user-plus"></i> 新規登録
             <% end %>
           </li>
           <li>
             <%= link_to new_member_session_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-user-plus"></i> ログイン
+              <i class="fa-solid fa-right-to-bracket"></i> ログイン
             <% end %>
           </li>
           <li>
