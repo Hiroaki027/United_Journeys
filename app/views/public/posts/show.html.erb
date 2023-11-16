@@ -1,6 +1,6 @@
 <div class= "container">
   <div class= "row">
-    <div class= "col-md-12 mt-3">
+    <div class= "col-xs-12 col-md-12 mt-3">
       <% if @post.post_images.attached? %>
         <% @post.post_images.each do |post| %>
           <%= image_tag post.variant(resize: '500x500') %>
@@ -14,29 +14,29 @@
     </div>
   </div>
   <div class= "row">
-    <div class= "col-md-2">
+    <div class= "col-xs-12 col-md-2">
       <%= image_tag @member.get_profile_image %>
     </div>
-    <div class= "col-md-6 mt-3">
+    <div class= "col-xs-12 col-md-6 mt-3">
       ユーザー名:<%= link_to member_path(@member.id) do %>
         <%= @member.nick_name %>
       <% end %>
       <div class= "row">
-        <div class= "col-md-12 mt-2">
+        <div class= "col-xs-12 col-md-12 mt-2">
           居住地: <%= @member.residence %>
         </div>
-        <div class= "col-md-12 mt-2">
+        <div class= "col-xs-12 col-md-12 mt-2">
           作成日: <%= @post.created_at.strftime('%Y/%m/%d/%H:%M') %>
         </div>
       </div>
     </div>
   </div>
   <div class= "row">
-    <div class= "col-md-8 border" style= "height: 200px;">
+    <div class= "col-xs-12 col-md-8 border" style= "height: 200px;">
       <%= @post.content %>
     </div>
   <% if @post.member == current_member %>
-    <div class= "col-md-1 d-flex flex-column">
+    <div class= "col-xs-12 col-md-1 d-flex flex-column">
       <%= link_to edit_post_path(@post.id), class: "mb-3" do %>
         <i class="fa-solid fa-pen-to-square fa-2xl"></i>
       <% end %>
@@ -46,18 +46,18 @@
     </div>
   <% end %>
   <% if @post.public_flag == "public" %>
-    <div class= "col-md-2">
+    <div class= "col-xs-12 col-md-2">
       <%= render "public/comments/comment_form", post: @post, comment: @comment %>
     </div>
   <% end %>
   </div>
   <div class= "row justify-content-center">
-    <div class= "col-md-1 px-0">
+    <div class= "col-xs-12 col-md-1 px-0">
       <div id= "favorite_btn_<%= @post.id %>">
         <%= render "public/favorites/favorite", post: @post %>
       </div>
     </div>
-    <div class= "col-md-2 px-0">
+    <div class= "col-xs-12 col-md-2 px-0">
       <div id="comment_counter">
         <%= render "public/comments/counter", post: @post %>
       </div>

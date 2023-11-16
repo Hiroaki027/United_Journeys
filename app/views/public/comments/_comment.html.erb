@@ -1,11 +1,11 @@
 <% post.comments.each do |comment| %>
-  <div class= "col-md-12 mt-3">
+  <div class= "col-xs-12 col-md-12 mt-3">
     <%= link_to(comment.member) do %>
       <%= comment.member.nick_name %>
     <% end %>
   </div>
-  <div class= "col-md-11 text-break border"><%= comment.comment %></div>
-  <div class= "col-md-1">
+  <div class= "col-xs-12 col-md-11 text-break border"><%= comment.comment %></div>
+  <div class= "col-xs-12 col-md-1">
     <% if comment.member == current_member %>
       <%= link_to '削除', post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-sm btn-danger ml-3"%>
     <% elsif admin_signed_in? %>
