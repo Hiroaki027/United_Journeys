@@ -1,9 +1,9 @@
 class Group < ApplicationRecord
   has_many :group_members, dependent: :destroy
   belongs_to :owner, class_name: 'Member'
-  has_many :members, through: :group_members
+  has_many :members, through: :group_members, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :introduction, presence: true
   has_one_attached :group_image
 

@@ -18,7 +18,8 @@ class Member < ApplicationRecord
   has_many :member_rooms
   has_many :chats
   has_many :rooms, through: :member_rooms #member_rooms(中間テーブル)を経由してroomへ
-  has_many :group_members
+  has_many :group_members, dependent: :destroy
+  has_many :groups, through: :group_users, dependent: :destroy
 
   validates :last_name, presence: true, length: { minimum: 1, maximum: 20 }
   validates :first_name, presence: true, length: { minimum: 1, maximum: 20 }
@@ -47,17 +48,17 @@ class Member < ApplicationRecord
   def get_profile_image
     (profile_image.attached?) ? profile_image : "no_image.jpg"
   end
-  
+
   # 指定したメンバーをフォローする
   def follow(member)
     active_relationships.create(followed_id: member.id)
   end
-  
+
   # 指定したメンバーのフォローを解除する
   def unfollow(member)
     active_relationships.find_by(followed_id: member.id).destroy
   end
-  
+
   # 指定したユーザーをフォローしているかどうかを判定
   def following?(member)
     followings.include?(member)
