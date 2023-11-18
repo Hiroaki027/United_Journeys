@@ -32,7 +32,7 @@ http://united-journeys.com/
 - <a href="https://docs.google.com/spreadsheets/d/1pyYg-DE8oua6zRN-nQTqsfOZmeBGO2UN26zk6NaAb0U/edit?usp=sharing" target="_blank">アプリケーション詳細設計書</a>
 
 ## 開発環境
-- OS：Windows10pro
+- OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
