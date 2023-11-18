@@ -1,4 +1,6 @@
 # United Journeys
+[![Image from Gyazo](https://i.gyazo.com/582afaafbc8eda199aa49d12db8236db.jpg)](https://gyazo.com/582afaafbc8eda199aa49d12db8236db)
+http://united-journeys.com/
 ​
 ## サイト概要
 ### サイトテーマ
