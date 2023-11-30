@@ -15,6 +15,10 @@ class Post < ApplicationRecord
     public_flag == "draft"
   end
 
+  def private?
+    public_flag == "private"
+  end
+
   def get_post_images
     (post_images.attached?) ? post_images : "no_image.jpg"
   end

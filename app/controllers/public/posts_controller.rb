@@ -1,5 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_member!, except: [:top, :admin]
+  before_action :ensure_member, only: [:edit, :update, :destroy]
+  
   def new
     @post = Post.new
   end
