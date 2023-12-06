@@ -18,7 +18,7 @@ before_action :configure_permitted_parameters, if: :devise_controller?
   def public_post
     @post = Post.find(params[:id])
     unless  @post.public_flag == "public"
-      redirect_to posts_path, notice: "ログイン会員以外は他の非公開投稿画面へ遷移できません。"
+      redirect_to posts_path, notice: "他の非公開投稿画面へ遷移できません。"
     end
   end
 end
