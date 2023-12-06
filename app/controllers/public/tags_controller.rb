@@ -13,7 +13,6 @@ class Public::TagsController < ApplicationController
 
     # 特定のタグに関連付けられた投稿を取得
     @tagged_posts = Post.tagged_with(tag_name)
-
     # ページネーションのために、特定のタグに関連付けられた投稿の総数を計算
     @total_posts_count = @tagged_posts.count
 

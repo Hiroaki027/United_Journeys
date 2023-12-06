@@ -20,26 +20,28 @@
             </thead>
             <tbody>
               <% @tagged_posts.each  do |post| %>
-                <tr data-href= "<%= post_path(post.id) %>">
-                  <td><%= post.title %></td>
-                <% if post.post_images.attached? %>
-                  <td><%= image_tag post.post_images[0].variant(resize: '50x50') %></td>
-                <% else %>
-                  <td><%= image_tag post.get_post_images ,size: "50x50" %></td>
+                <% if post.public_flag == "public" %>
+                  <tr data-href= "<%= post_path(post.id) %>">
+                    <td><%= post.title %></td>
+                  <% if post.post_images.attached? %>
+                    <td><%= image_tag post.post_images[0].variant(resize: '50x50') %></td>
+                  <% else %>
+                    <td><%= image_tag post.get_post_images ,size: "50x50" %></td>
+                  <% end %>
+                    <td><%= post.member.nick_name %></td>
+                    <td><%= post.created_at.strftime('%Y/%m/%d/%H:%M') %></td>
+                    <td><%= post.language %></td>
+                    <td id= "favorite_btn_<%= post.id %>">
+                      <%= render "public/favorites/favorite", post: post %>
+                    </td>
+                    <td>コメント数:<%= post.comments.count %></td>
+                    <td>
+                      <% post.tag_list.first(2).each do |tag| %>
+                        <span class="tag-btn ml-3"><%= link_to tag, tag_path(tag) %></span>
+                      <% end %>
+                    </td>
+                  </tr>
                 <% end %>
-                  <td><%= post.member.nick_name %></td>
-                  <td><%= post.created_at.strftime('%Y/%m/%d/%H:%M') %></td>
-                  <td><%= post.language %></td>
-                  <td id= "favorite_btn_<%= post.id %>">
-                    <%= render "public/favorites/favorite", post: post %>
-                  </td>
-                  <td>コメント数:<%= post.comments.count %></td>
-                  <td>
-                    <% post.tag_list.first(2).each do |tag| %>
-                      <span class="tag-btn ml-3"><%= link_to tag, tag_path(tag) %></span>
-                    <% end %>
-                  </td>
-                </tr>
               <% end %>
             </tbody>
           </table>
