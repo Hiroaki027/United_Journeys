@@ -56,4 +56,8 @@ class Public::MembersController < ApplicationController
       redirect_to member_path(current_member), notice: "ゲスト会員はプロフィール編集画面へ遷移できません。"
     end
   end
+  
+  def active_for_authientication?
+    super && active? # ユーザーがログインするためには、active?がtrueを返すことも必要
+  end
 end
